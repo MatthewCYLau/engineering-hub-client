@@ -8,9 +8,9 @@
           >Home</router-link
         >
         <router-link
-          to="/tasks"
+          to="/login"
           class="inline-block px-16 py-4 transition-colors hover:bg-purple-500 duration-300"
-          >Tasks</router-link
+          >Login</router-link
         >
       </div>
     </div>
@@ -20,7 +20,5 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export default defineComponent({
-  setup() {},
-});
+export default defineComponent({});
 </script>

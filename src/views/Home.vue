@@ -56,7 +56,6 @@
         </div>
       </div>
     </div>
-    <Header title="Engineering Hub" />
 
     <!--Main-->
     <div

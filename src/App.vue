@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, watch } from "vue";
-import { useAuth } from "./modules/auth";
+import { useAuth, loadUser } from "./modules/auth";
 import Nav from "./components/Nav.vue";
 import Header from "./components/Header.vue";
 
@@ -35,6 +35,9 @@ export default defineComponent({
     });
 
     return { authenticating, user };
+  },
+  mounted() {
+    loadUser();
   },
 });
 </script>
