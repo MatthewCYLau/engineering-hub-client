@@ -1,43 +1,168 @@
 <template>
-  <form @submit.prevent="submit">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+  <div
+    class="min-h-screen bg-gray-800 fixed z-50 inset-0 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+  >
+    <div class="max-w-md w-full bg-gray-900 px-8 py-16 rounded-lg">
+      <div>
+        <img
+          class="mx-auto h-18 w-auto"
+          src="../assets/neoflix-logo.png"
+          alt="Workflow"
+        />
+        <h2
+          class="mt-12 text-center text-3xl leading-9 font-extrabold text-gray-300"
+        >
+          Sign in to your account
+        </h2>
+        <p class="mt-2 text-center text-sm leading-5 text-gray-500">
+          Or
+          <router-link
+            to="/register"
+            href="#"
+            class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+          >
+            start your 14-day free trial
+          </router-link>
+        </p>
+      </div>
+      <form class="mt-12" @submit.prevent="submit">
+        <div
+          class="mb-12 text-red-100 py-2 pl-4 border-l-4 border-red-600 rounded-sm bg-red-900"
+          v-if="errorMessage"
+          v-html="errorMessage"
+        />
 
-    <input v-model="data.email" type="email" class="form-control" placeholder="Email" required>
+        <div class="rounded-md shadow-sm">
+          <div>
+            <input
+              aria-label="Email address"
+              name="email"
+              type="email"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+              placeholder="Email address"
+              v-model="email"
+            />
+          </div>
+          <div class="-mt-px">
+            <input
+              aria-label="Password"
+              name="password"
+              type="password"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+              placeholder="Password"
+              v-model="password"
+            />
+          </div>
+        </div>
 
-    <input v-model="data.password" type="password" class="form-control" placeholder="Password" required>
+        <div class="mt-6 flex items-center justify-between">
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out"
+              v-model="rememberMe"
+            />
+            <label
+              for="remember_me"
+              class="ml-2 block text-sm leading-5 text-gray-500"
+            >
+              Remember me
+            </label>
+          </div>
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-  </form>
+          <!-- <div class="text-sm leading-5">
+            <router-link
+              to="/register"
+              class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+            >
+              Don't have an account?
+            </router-link>
+          </div> -->
+        </div>
+        <div class="mt-6">
+          <button
+            type="submit"
+            class="group relative w-full flex justify-center py-4 px-6 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red disabled:bg-red-900 active:bg-red-700 transition duration-150 ease-in-out"
+            :disabled="loading"
+          >
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <svg
+                class="h-5 w-5 text-red-200 group-hover:text-red-200 transition ease-in-out duration-150"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
+            Sign in
+          </button>
+        </div>
+        <div class="mt-6">
+          <p class="mt-2 text-center text-sm leading-5 text-gray-500">
+            Don't have an account?
+            <router-link
+              to="/register"
+              class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+            >
+              Register now.
+            </router-link>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import {reactive} from 'vue';
-import {useRouter} from "vue-router";
+import {
+  computed,
+  defineComponent,
+  onErrorCaptured,
+  reactive,
+  ref,
+  toRefs,
+  watch,
+} from "vue";
+import { useRouter } from "vue-router";
+import { useApi } from "../modules/api";
+import { useAuth } from "../modules/auth";
 
-export default {
-  name: "Login",
+interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export default defineComponent({
   setup() {
-    const data = reactive({
-      email: '',
-      password: ''
-    });
+    const { loading, data, post } = useApi("api/auth");
+
+    const { setUser } = useAuth();
     const router = useRouter();
 
-    const submit = async () => {
-      await fetch('http://localhost:8000/api/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include',
-        body: JSON.stringify(data)
-      });
+    const payload = reactive<LoginPayload>({
+      email: "adam@neo4j.com",
+      password: "password",
+    });
 
-      await router.push('/');
-    }
+    const submit = () => {
+      post(payload).then(() => {
+        localStorage.setItem("engineering-hub-token", data.value.token);
+        setUser(data.value);
+        router.push({ name: "dashboard" });
+      });
+    };
 
     return {
-      data,
-      submit
-    }
-  }
-}
+      loading,
+      submit,
+      ...toRefs(payload),
+    };
+  },
+});
 </script>
