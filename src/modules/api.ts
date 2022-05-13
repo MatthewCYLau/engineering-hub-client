@@ -4,9 +4,8 @@ import { useRouter } from "vue-router";
 import { useAuth, AUTH_TOKEN } from "./auth";
 
 export const useApiWithAuth = (endpoint: string) => {
-  const { user } = useAuth();
-
-  return useApi(endpoint, user?.value ? user.value[AUTH_TOKEN] : undefined);
+  const token = localStorage.getItem("token") || "";
+  return useApi(endpoint, token);
 };
 
 export const useApi = (endpoint: string, access_token?: string) => {
@@ -14,7 +13,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
   const api = axios.create({
     baseURL: "http://localhost:8081/",
     headers: {
-      "x-auth-token": access_token ? `Bearer ${access_token}` : "",
+      "x-auth-token": access_token ? access_token : "",
     },
   });
 

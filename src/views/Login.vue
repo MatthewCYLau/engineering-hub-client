@@ -146,13 +146,13 @@ export default defineComponent({
     const router = useRouter();
 
     const payload = reactive<LoginPayload>({
-      email: "adam@neo4j.com",
+      email: "lau.cy.matthew@gmail.com",
       password: "password",
     });
 
     const submit = () => {
       post(payload).then(() => {
-        localStorage.setItem("engineering-hub-token", data.value.token);
+        localStorage.setItem("token", data.value.token);
         setUser(data.value);
         router.push({ name: "dashboard" });
       });
