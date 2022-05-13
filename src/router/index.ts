@@ -5,10 +5,25 @@ import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 
 const routes: Array<RouteRecordRaw> = [
-  { path: "/", name: "home", component: Home },
-  { path: "/dashboard", name: "dashboard", component: Dashboard },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
+  { path: "/", name: "home", component: Home, meta: { requiresAuth: false } },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard,
+    meta: { requiresAuth: true },
+  },
+  { path: "/login", component: Login, meta: { requiresAuth: false } },
+  {
+    path: "/register",
+    component: Register,
+    meta: {
+      requiresAuth: {
+        path: "/login",
+        component: Login,
+        meta: { requiresAuth: false },
+      },
+    },
+  },
 ];
 
 const router = createRouter({

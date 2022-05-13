@@ -26,7 +26,7 @@ export default defineComponent({
       if (
         authenticating.value === false &&
         route.meta.requiresAuth === true &&
-        user?.value
+        user?.value?.id
       ) {
         console.log("redirecting home in app.vue");
 
