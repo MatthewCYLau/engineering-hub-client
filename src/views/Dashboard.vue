@@ -17,6 +17,7 @@
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useApiWithAuth } from "../modules/api";
+import { loadUser } from "../modules/auth";
 
 export default {
   name: "Dashboard",
@@ -38,6 +39,9 @@ export default {
     });
 
     return { email, data, loading };
+  },
+  mounted() {
+    loadUser();
   },
 };
 </script>

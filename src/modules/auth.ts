@@ -7,10 +7,7 @@ export const AUTH_TOKEN = "access_token";
 interface User {
   id: string;
   email: string;
-  dateOfBirth: Date;
-  firstName: string;
-  lastName: string;
-  [AUTH_TOKEN]: string;
+  joineDate: Date;
 }
 
 interface AuthState {
@@ -58,8 +55,8 @@ export const useAuth = () => {
   };
 
   return {
-    setUser,
     logout,
+    setUser,
     ...toRefs(state),
   };
 };

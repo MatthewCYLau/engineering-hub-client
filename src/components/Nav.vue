@@ -13,9 +13,9 @@
           </li>
         </ul>
 
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" v-if="auth">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0" v-if="user">
           <li class="nav-item">
-            <a href="#" class="nav-link" @click="logout">Logout</a>
+            <a href="#" class="nav-link" @click="logoutUser">Logout</a>
           </li>
         </ul>
       </div>
@@ -24,28 +24,18 @@
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { defineComponent } from "vue";
+import { useAuth, loadUser } from "../modules/auth";
 
-export default {
-  name: "Nav",
+export default defineComponent({
   setup() {
-    const store = useStore();
-
-    const auth = computed(() => store.state.authenticated);
-
-    const logout = async () => {
-      await fetch("http://localhost:8000/api/logout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-    };
-
-    return {
-      auth,
-      logout,
-    };
+    const { user, logout } = useAuth();
+    const logoutUser = () => logout();
+    console.log(user?.value);
+    return { user, logoutUser };
   },
-};
+  mounted() {
+    loadUser();
+  },
+});
 </script>
