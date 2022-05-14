@@ -18,23 +18,23 @@ import { useRoute, useRouter } from "vue-router";
 export default defineComponent({
   components: { Nav, Header },
   setup() {
-    const { authenticating, user } = useAuth();
+    const { loading, user } = useAuth();
     const router = useRouter();
     const route = useRoute();
 
     watch([user], () => {
       if (
-        authenticating.value === false &&
+        loading.value === false &&
         route.meta.requiresAuth === true &&
         user?.value?.id
       ) {
         console.log("redirecting home in app.vue");
 
         router.push({ name: "home" });
-      } else if (authenticating.value !== false) router.push({ name: "login" });
+      } else if (loading.value !== false) router.push({ name: "login" });
     });
 
-    return { authenticating, user };
+    return { loading, user };
   },
   mounted() {
     loadUser();

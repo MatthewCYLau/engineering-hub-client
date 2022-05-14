@@ -62,7 +62,6 @@
             <input
               type="checkbox"
               class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out"
-              v-model="rememberMe"
             />
             <label
               for="remember_me"
@@ -120,18 +119,9 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onErrorCaptured,
-  reactive,
-  ref,
-  toRefs,
-  watch,
-} from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
 import { useApi } from "../modules/api";
-import { useAuth } from "../modules/auth";
 
 interface LoginPayload {
   email: string;
@@ -142,7 +132,6 @@ export default defineComponent({
   setup() {
     const { loading, data, post } = useApi("api/auth");
 
-    const { setUser } = useAuth();
     const router = useRouter();
 
     const payload = reactive<LoginPayload>({
@@ -153,7 +142,6 @@ export default defineComponent({
     const submit = () => {
       post(payload).then(() => {
         localStorage.setItem("token", data.value.token);
-        setUser(data.value);
         router.push({ name: "dashboard" });
       });
     };

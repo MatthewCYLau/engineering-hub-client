@@ -1,5 +1,5 @@
-import { computed, inject, reactive, toRefs, watch } from "vue";
-import { useApi, useApiWithAuth } from "./api";
+import { reactive, toRefs, watch } from "vue";
+import { useApi } from "./api";
 
 const AUTH_KEY = "token";
 export const AUTH_TOKEN = "access_token";
@@ -14,13 +14,13 @@ interface User {
 }
 
 interface AuthState {
-  authenticating: boolean;
+  loading: boolean;
   user?: User;
   error?: Error;
 }
 
 const state = reactive<AuthState>({
-  authenticating: false,
+  loading: false,
   user: undefined,
   error: undefined,
 });
@@ -30,7 +30,7 @@ export const loadUser = () => {
   const token = window.localStorage.getItem(AUTH_KEY);
   if (token) {
     const { loading, error, data, get } = useApi("/api/auth");
-    state.authenticating = true;
+    state.loading = true;
 
     get({ headers: { "x-auth-token": token } });
 
@@ -41,7 +41,7 @@ export const loadUser = () => {
         state.user = data.value;
       }
 
-      state.authenticating = false;
+      state.loading = false;
     });
   }
 };
