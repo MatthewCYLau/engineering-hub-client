@@ -35,7 +35,7 @@ export const loadUser = () => {
       if (error.value) {
         window.localStorage.removeItem(AUTH_KEY);
       } else if (data.value) {
-        state.user = data.value;
+        state.user = data.value["currentUser"];
       }
 
       state.loading = false;

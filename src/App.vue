@@ -7,8 +7,6 @@
 <script lang="ts">
 import { defineComponent, watch } from "vue";
 import { useAuth, loadUser } from "./modules/auth";
-import Nav from "./components/Nav.vue";
-import Header from "./components/Header.vue";
 
 import { useRoute, useRouter } from "vue-router";
 
@@ -23,7 +21,7 @@ export default defineComponent({
       if (
         loading.value === false &&
         route.meta.requiresAuth === true &&
-        user?.value?.id
+        !user?.value
       ) {
         console.log("redirecting home in app.vue");
 

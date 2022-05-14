@@ -1,117 +1,86 @@
 <template>
-  <div
-    class="min-h-screen bg-gray-800 fixed z-50 inset-0 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
-  >
-    <div class="max-w-md w-full bg-gray-900 px-8 py-16 rounded-lg">
-      <div>
-        <img
-          class="mx-auto h-18 w-auto"
-          src="../assets/neoflix-logo.png"
-          alt="Workflow"
-        />
-        <h2
-          class="mt-12 text-center text-3xl leading-9 font-extrabold text-gray-300"
-        >
-          Sign in to your account
-        </h2>
-        <p class="mt-2 text-center text-sm leading-5 text-gray-500">
-          Or
-          <router-link
-            to="/register"
-            href="#"
-            class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-          >
-            start your 14-day free trial
-          </router-link>
-        </p>
-      </div>
-      <form class="mt-12" @submit.prevent="submit">
-        <div
-          class="mb-12 text-red-100 py-2 pl-4 border-l-4 border-red-600 rounded-sm bg-red-900"
-          v-if="errorMessage"
-          v-html="errorMessage"
-        />
+  <div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+    <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+      <form @submit.prevent="submit">
+        <h1 class="font-bold text-center text-2xl mb-5">Engineering Hub</h1>
 
-        <div class="rounded-md shadow-sm">
-          <div>
+        <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+          <div class="px-5 py-7">
+            <label class="font-semibold text-sm text-gray-600 pb-1 block"
+              >E-mail</label
+            >
+
             <input
               aria-label="Email address"
               name="email"
               type="email"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+              class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               placeholder="Email address"
               v-model="email"
             />
-          </div>
-          <div class="-mt-px">
+            <label class="font-semibold text-sm text-gray-600 pb-1 block"
+              >Password</label
+            >
             <input
               aria-label="Password"
               name="password"
               type="password"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+              class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               placeholder="Password"
               v-model="password"
             />
-          </div>
-        </div>
-
-        <div class="mt-6 flex items-center justify-between">
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out"
-            />
-            <label
-              for="remember_me"
-              class="ml-2 block text-sm leading-5 text-gray-500"
+            <button
+              type="submit"
+              class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
             >
-              Remember me
-            </label>
-          </div>
-
-          <!-- <div class="text-sm leading-5">
-            <router-link
-              to="/register"
-              class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-            >
-              Don't have an account?
-            </router-link>
-          </div> -->
-        </div>
-        <div class="mt-6">
-          <button
-            type="submit"
-            class="group relative w-full flex justify-center py-4 px-6 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red disabled:bg-red-900 active:bg-red-700 transition duration-150 ease-in-out"
-            :disabled="loading"
-          >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <span class="inline-block mr-2">Login</span>
               <svg
-                class="h-5 w-5 text-red-200 group-hover:text-red-200 transition ease-in-out duration-150"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-4 h-4 inline-block"
               >
                 <path
-                  fill-rule="evenodd"
-                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                  clip-rule="evenodd"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </span>
-            Sign in
-          </button>
+            </button>
+          </div>
         </div>
-        <div class="mt-6">
-          <p class="mt-2 text-center text-sm leading-5 text-gray-500">
-            Don't have an account?
-            <router-link
-              to="/register"
-              class="font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-            >
-              Register now.
-            </router-link>
-          </p>
+        <div class="py-5">
+          <div class="grid grid-cols-2 gap-1">
+            <div class="text-center sm:text-left whitespace-nowrap">
+              <button
+                class="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  class="w-4 h-4 inline-block align-text-top"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
+                </svg>
+                <router-link to="/"
+                  ><span class="inline-block ml-1"
+                    >Back to home</span
+                  ></router-link
+                >
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
