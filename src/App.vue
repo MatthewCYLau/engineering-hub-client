@@ -1,7 +1,4 @@
 <template>
-  <Nav />
-  <Header />
-
   <main class="form-signin">
     <router-view />
   </main>
@@ -16,7 +13,7 @@ import Header from "./components/Header.vue";
 import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
-  components: { Nav, Header },
+  components: {},
   setup() {
     const { loading, user } = useAuth();
     const router = useRouter();

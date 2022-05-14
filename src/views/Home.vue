@@ -1,107 +1,121 @@
 <template>
-  <div
-    class="h-screen pb-14 bg-right bg-cover"
-    style="background-image:url('bg.svg');"
-  >
-    <!--Nav-->
-    <div class="w-full container mx-auto p-6">
-      <div class="w-full flex items-center justify-between">
-        <a
-          class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-          href="#"
+  <section class="w-full px-6 pb-12 antialiased bg-white">
+    <div class="mx-auto max-w-7xl">
+      <nav class="relative z-50 h-24 select-none" x-data="{ showMenu: false }">
+        <div
+          class="container relative flex flex-wrap items-center justify-between h-24 mx-auto overflow-hidden font-medium border-b border-gray-200 md:overflow-visible lg:justify-center sm:px-4 md:px-2"
         >
-          <svg
-            class="h-8 fill-current text-indigo-600 pr-2"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
+          <div class="flex items-center justify-start w-1/4 h-full pr-4">
+            <a href="/" class="inline-block py-4 md:py-0">
+              <span class="p-1 text-xl font-black leading-none text-gray-900"
+                ><span>Engineering Hub</span
+                ><span class="text-indigo-600">.</span></span
+              >
+            </a>
+          </div>
+          <div
+            class="top-0 left-0 items-start hidden w-full h-full p-4 text-sm bg-gray-900 bg-opacity-50 md:items-center md:w-3/4 md:absolute lg:text-base md:bg-transparent md:p-0 md:relative md:flex"
+            :class="{ 'flex fixed': true }"
           >
-            <path
-              d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"
-            />
-          </svg>
-          APP
-        </a>
-
-        <div class="flex w-1/2 justify-end content-center">
-          <a
-            class="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
-            data-tippy-content="@twitter_handle"
-            href="https://twitter.com/intent/tweet?url=#"
+            <div
+              class="flex-col w-full h-auto overflow-hidden bg-white rounded-lg md:bg-transparent md:overflow-visible md:rounded-none md:relative md:flex md:flex-row"
+            >
+              <a
+                href="#_"
+                class="inline-flex items-center block w-auto h-16 px-6 text-xl font-black leading-none text-gray-900 md:hidden"
+                >tails<span class="text-indigo-600">.</span></a
+              >
+              <div
+                class="flex flex-col items-start justify-center w-full space-x-6 text-center lg:space-x-8 md:w-2/3 md:mt-0 md:flex-row md:items-center"
+              ></div>
+              <div
+                class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0"
+              >
+                <a
+                  href="/login"
+                  class="w-full px-6 py-2 mr-0 text-gray-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto"
+                  >Sign In</a
+                >
+                <a
+                  href="#_"
+                  class="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600"
+                  >Sign Up</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            @click="showMenu = !showMenu"
+            class="absolute right-0 flex flex-col items-center items-end justify-center w-10 h-10 bg-white rounded-full cursor-pointer md:hidden hover:bg-gray-100"
           >
             <svg
-              class="fill-current h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
+              class="w-6 h-6 text-gray-700"
+              x-show="!showMenu"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              x-cloak=""
             >
-              <path
-                d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"
-              ></path>
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
-          </a>
-          <a
-            class="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 "
-            data-tippy-content="#facebook_id"
-            href="https://www.facebook.com/sharer/sharer.php?u=#"
-          >
             <svg
-              class="fill-current h-6"
+              class="w-6 h-6 text-gray-700"
+              x-show="showMenu"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
+              x-cloak=""
             >
               <path
-                d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
               ></path>
             </svg>
-          </a>
+          </div>
         </div>
-      </div>
-    </div>
+      </nav>
 
-    <!--Main-->
-    <div
-      class="container pt-24 md:pt-48 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center"
-    >
-      <!--Left Col-->
+      <!-- Main Hero Content -->
       <div
-        class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden"
+        class="container max-w-lg px-4 py-32 mx-auto text-left md:max-w-none md:text-center"
       >
         <h1
-          class="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1"
+          class="text-5xl font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl"
         >
-          Engineering Hub
+          <span class="inline md:block">Start Capturing Your</span>
+          <span
+            class="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-indigo-500 md:inline-block"
+            >Next Great Ideas</span
+          >
         </h1>
-        <p
-          class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle"
-        >
-          Track your tasks, and collaborate!
-        </p>
-
-        <p
-          class="text-blue-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in"
-        >
-          Powered by:
-        </p>
         <div
-          class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in"
+          class="mx-auto mt-5 text-gray-500 md:mt-12 md:max-w-lg md:text-center lg:text-lg"
         >
-          <img src="/assets/logo.png" class="h-12 pr-4 bounce-top-icons" />
+          Create, read, update, and delete your tasks
+        </div>
+        <div class="flex flex-col items-center mt-12 text-center">
+          <span class="relative inline-flex w-full md:w-auto">
+            <a
+              href="/"
+              class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+            >
+              Sign Up
+            </a>
+            <span
+              class="absolute top-0 right-0 px-2 py-1 -mt-3 -mr-6 text-xs font-medium leading-tight text-white bg-green-400 rounded-full"
+              >now!</span
+            >
+          </span>
+          <a href="/login" class="mt-3 text-sm text-indigo-500">Sign In</a>
         </div>
       </div>
-
-      <!--Right Col-->
-      <div class="w-full xl:w-2/5 py-6 overflow-y-hidden">
-        <img
-          class="w-5/6 mx-auto lg:mr-0 slide-in-bottom"
-          src="/assets/code.png"
-        />
-      </div>
-
-      <!--Footer-->
-      <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
-        <a class="text-gray-500 no-underline hover:no-underline" href="#"
-          >&copy; App 2022</a
-        >
-      </div>
+      <!-- End Main Hero Content -->
     </div>
-  </div>
+  </section>
 </template>

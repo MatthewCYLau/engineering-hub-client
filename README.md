@@ -1,25 +1,23 @@
-# vue-auth
+# Engineering Hub Client
+
+Engineering Hub client
+
+App URL [here](https://jocular-quokka-c360ca.netlify.app/)
 
 ## Project setup
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Run the Vue dev server (http://localhost:8080)
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+## Compiles and minifies for production
+
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# vue-auth

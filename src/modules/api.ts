@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { computed, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { useAuth, AUTH_TOKEN } from "./auth";
 
 export const useApiWithAuth = (endpoint: string) => {
   const token = localStorage.getItem("token") || "";
