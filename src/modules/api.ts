@@ -7,12 +7,12 @@ export const useApiWithAuth = (endpoint: string) => {
   return useApi(endpoint, token);
 };
 
-export const useApi = (endpoint: string, access_token?: string) => {
+export const useApi = (endpoint: string, accessToken?: string) => {
   const router = useRouter();
   const api = axios.create({
     baseURL: "http://localhost:8081/",
     headers: {
-      "x-auth-token": access_token ? access_token : "",
+      "x-auth-token": accessToken ? accessToken : "",
     },
   });
 
