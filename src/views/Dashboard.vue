@@ -72,6 +72,7 @@ import { useAuth, loadUser } from "../modules/auth";
 
 export default defineComponent({
   setup() {
+    loadUser();
     const { user } = useAuth();
     const { loading, data, get } = useApiWithAuth("/api/tasks");
 
@@ -80,7 +81,7 @@ export default defineComponent({
     return { user, data, loading, initials };
   },
   onMounted() {
-    loadUser();
+    // loadUser();
   },
 });
 </script>
