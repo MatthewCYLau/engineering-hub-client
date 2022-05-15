@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container-fluid">
-      <router-link to="/" class="navbar-brand">Home</router-link>
+      <router-link to="/"
+        ><h1 class="text-white text-lg mb-2 font-bold">Home</h1></router-link
+      >
 
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-md-0" v-if="!auth">
@@ -11,10 +13,7 @@
           <li class="nav-item">
             <router-link to="/register" class="nav-link">Register</router-link>
           </li>
-        </ul>
-
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" v-if="user">
-          <li class="nav-item">
+          <li class="nav-item" v-if="user">
             <a href="#" class="nav-link" @click="logoutUser">Logout</a>
           </li>
         </ul>

@@ -1,4 +1,5 @@
 <template>
+  <Nav />
   <div><h1 class="p-2 mt-4 font-bold text-xl">Tasks</h1></div>
   <div class="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4">
     <img
@@ -67,10 +68,11 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useApiWithAuth } from "../modules/api";
-
+import Nav from "../components/Nav.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 export default defineComponent({
+  components: { Nav },
   setup() {
     loadUser();
     const { user } = useAuth();
