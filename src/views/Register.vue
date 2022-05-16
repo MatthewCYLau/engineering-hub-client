@@ -14,7 +14,6 @@
               aria-label="Email address"
               name="email"
               type="email"
-              required
               class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               placeholder="Email address"
               v-model="email"
@@ -26,7 +25,6 @@
               aria-label="Password"
               name="password"
               type="password"
-              required
               class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               placeholder="Password"
               v-model="password"

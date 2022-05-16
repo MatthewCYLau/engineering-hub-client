@@ -61,16 +61,10 @@
           class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
         >
           <div class="flex-shrink-0 flex items-center">
-            <img
-              class="block lg:hidden h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-              alt="Workflow"
-            />
-            <img
-              class="hidden lg:block h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-              alt="Workflow"
-            />
+            <span class="p-1 text-xl text-white leading-none font-black"
+              ><span>Engineering Hub</span
+              ><span class="text-slate-50">.</span></span
+            >
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
@@ -189,6 +183,7 @@
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-2"
+                @click="logoutUser"
                 >Sign out</a
               >
             </div>
@@ -238,7 +233,6 @@ export default defineComponent({
   setup() {
     const { user, logout } = useAuth();
     const logoutUser = () => logout();
-    console.log(user?.value);
     return { user, logoutUser };
   },
   data() {
