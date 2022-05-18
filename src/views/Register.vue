@@ -14,9 +14,33 @@
               aria-label="Email address"
               name="email"
               type="email"
-              class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
               placeholder="Email address"
               v-model="email"
+            />
+            <label class="font-semibold text-sm text-gray-600 pb-1 block"
+              >First name</label
+            >
+
+            <input
+              aria-label="First name"
+              name="firstName"
+              type="text"
+              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
+              placeholder="First name"
+              v-model="firstName"
+            />
+            <label class="font-semibold text-sm text-gray-600 pb-1 block"
+              >Last name</label
+            >
+
+            <input
+              aria-label="Last name"
+              name="lastName"
+              type="text"
+              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
+              placeholder="Last name"
+              v-model="lastName"
             />
             <label class="font-semibold text-sm text-gray-600 pb-1 block"
               >Password</label
@@ -25,7 +49,7 @@
               aria-label="Password"
               name="password"
               type="password"
-              class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
               placeholder="Password"
               v-model="password"
             />
@@ -107,6 +131,8 @@ import { useApi } from "../modules/api";
 interface LoginPayload {
   email?: string;
   password?: string;
+  firstName?: string;
+  lastName?: string;
   joinedDate?: Date;
 }
 
@@ -127,6 +153,8 @@ export default defineComponent({
     const payload = reactive<LoginPayload>({
       email: undefined,
       password: undefined,
+      firstName: undefined,
+      lastName: undefined,
       joinedDate: undefined,
     });
 
