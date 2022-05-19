@@ -15,40 +15,33 @@
       <div class="flex flex-wrap -m-4">
         <div class="lg:w-1/2 sm:w-full sm:px-6 lg:px-8">
           <div class="mt-8">
-            <form class="p-6 flex flex-col justify-center">
+            <form
+              @submit.prevent="submit"
+              class="p-6 flex flex-col justify-center"
+            >
               <div class="flex flex-col">
-                <label for="name" class="hidden">Full Name</label>
+                <label for="name" class="hidden">Name</label>
                 <input
-                  type="name"
+                  type="text"
                   name="name"
                   id="name"
-                  placeholder="Full Name"
+                  placeholder="Name"
+                  v-model="name"
                   class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
                 />
               </div>
 
               <div class="flex flex-col mt-2">
-                <label for="email" class="hidden">Email</label>
+                <label for="description" class="hidden">Description</label>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
+                  type="text"
+                  name="description"
+                  id="description"
+                  v-model="description"
+                  placeholder="Description"
                   class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
                 />
               </div>
-
-              <div class="flex flex-col mt-2">
-                <label for="tel" class="hidden">Number</label>
-                <input
-                  type="tel"
-                  name="tel"
-                  id="tel"
-                  placeholder="Telephone Number"
-                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
-                />
-              </div>
-
               <button
                 type="submit"
                 class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300"
@@ -64,21 +57,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
+
 import { useApiWithAuth } from "../modules/api";
 import Nav from "../components/Nav.vue";
 import { useAuth, loadUser } from "../modules/auth";
+
+interface CreateTaskPayload {
+  name?: string;
+  description?: string;
+}
 
 export default defineComponent({
   components: { Nav },
   setup() {
     loadUser();
     const { user } = useAuth();
-    const { loading, data, get } = useApiWithAuth("/api/tasks");
+    const { loading, data, post } = useApiWithAuth("/api/tasks");
 
-    get();
     const initials = computed(() => user?.value && user.value.email);
-    return { user, data, loading, initials };
+
+    const router = useRouter();
+
+    const payload = reactive<CreateTaskPayload>({
+      name: undefined,
+      description: undefined,
+    });
+
+    const submit = () => {
+      post(payload).then(() => {
+        router.push({ name: "dashboard" });
+      });
+    };
+    return { user, data, loading, initials, submit, ...toRefs(payload) };
   },
   onMounted() {
     // loadUser();
