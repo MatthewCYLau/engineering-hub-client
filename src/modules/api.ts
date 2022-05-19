@@ -51,20 +51,20 @@ export const useApi = (endpoint: string, accessToken?: string) => {
   };
 
   // @ts-ignore
-  // const del = () => {
-  //   loading.value = true;
-  //   error.value = undefined;
+  const del = () => {
+    loading.value = true;
+    error.value = undefined;
 
-  //   return api
-  //     .delete(endpoint)
-  //     .then((res) => (data.value = res.data))
-  //     .catch((e) => {
-  //       error.value = e;
+    return api
+      .delete(endpoint)
+      .then((res) => (data.value = res.data))
+      .catch((e) => {
+        error.value = e;
 
-  //       throw e;
-  //     })
-  //     .finally(() => (loading.value = false));
-  // };
+        throw e;
+      })
+      .finally(() => (loading.value = false));
+  };
 
   watch([error], () => {
     // If 401 Unauthorised, force user to buy a new subscription
@@ -79,6 +79,7 @@ export const useApi = (endpoint: string, accessToken?: string) => {
     error,
     get,
     post,
+    del,
   };
 };
 

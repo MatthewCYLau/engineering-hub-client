@@ -32,27 +32,14 @@
         </div>
       </div>
       <div class="flex flex-wrap -m-4">
-        <div class="xl:w-1/3 md:w-1/2 p-4" v-for="task in data" :key="task.id">
-          <router-link :to="'/tasks/' + task._id">
-            <div class="bg-white p-6 rounded-lg">
-              <img
-                class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72  rounded w-full object-cover object-center mb-6"
-                src="https://kuyou.id/content/images/ctc_2020021605150668915.jpg"
-                alt="Image Size 720x400"
-              />
-              <h3
-                class="tracking-widest text-indigo-500 text-xs font-medium title-font"
-              >
-                {{ `${task.owner.firstName} ${task.owner.lastName}` }}
-              </h3>
-              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                {{ task.name }}
-              </h2>
-              <p class="leading-relaxed text-base">
-                {{ task.description }}
-              </p>
-            </div>
-          </router-link>
+        <div class="xl:w-1/3 md:w-1/2 p-4" v-for="task in data" :key="task._id">
+          <TaskCard
+            :id="task._id"
+            :firstName="task.owner.firstName"
+            :lastName="task.owner.lastName"
+            :name="task.name"
+            :description="task.description"
+          />
         </div>
       </div>
     </div>
@@ -63,10 +50,11 @@
 import { defineComponent, computed } from "vue";
 import { useApiWithAuth } from "../modules/api";
 import Nav from "../components/Nav.vue";
+import TaskCard from "../components/TaskCard.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 export default defineComponent({
-  components: { Nav },
+  components: { Nav, TaskCard },
   setup() {
     loadUser();
     const { user } = useAuth();

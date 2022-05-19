@@ -31,6 +31,12 @@
             <p class="leading-relaxed text-base">
               {{ data.description }}
             </p>
+            <button
+              @click="deleteTask"
+              class="text-white px-4 mt-8 w-auto h-10 bg-red-500 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+            >
+              <span class="title-font font-medium">Delete</span>
+            </button>
           </div>
         </div>
       </div>
@@ -40,6 +46,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 import { useApiWithAuth } from "../modules/api";
 import Nav from "../components/Nav.vue";
 import { useAuth, loadUser } from "../modules/auth";
@@ -48,13 +55,21 @@ export default defineComponent({
   components: { Nav },
   props: ["id"],
   setup(props) {
+    const router = useRouter();
     loadUser();
     const { user } = useAuth();
     const { loading, data, get } = useApiWithAuth(`/api/tasks/${props.id}`);
-
     get();
-    return { user, data, loading };
+
+    const deleteTask = () => {
+      const { del } = useApiWithAuth(`/api/tasks/${props.id}`);
+      del().then(() => {
+        router.push({ name: "dashboard" });
+      });
+    };
+    return { user, data, loading, deleteTask };
   },
+
   onMounted() {
     // loadUser();
   },
