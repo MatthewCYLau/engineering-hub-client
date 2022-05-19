@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
 import AddTask from "@/views/AddTask.vue";
+import TaskPage from "@/views/Task.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
@@ -18,6 +19,13 @@ const routes: Array<RouteRecordRaw> = [
     name: "addTask",
     component: AddTask,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/tasks/:id",
+    name: "taskPage",
+    component: TaskPage,
+    meta: { requiresAuth: true },
+    props: (route) => ({ id: route.params.id }),
   },
   { path: "/login", component: Login, meta: { requiresAuth: false } },
   {

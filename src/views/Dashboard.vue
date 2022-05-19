@@ -33,24 +33,26 @@
       </div>
       <div class="flex flex-wrap -m-4">
         <div class="xl:w-1/3 md:w-1/2 p-4" v-for="task in data" :key="task.id">
-          <div class="bg-white p-6 rounded-lg">
-            <img
-              class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72  rounded w-full object-cover object-center mb-6"
-              src="https://kuyou.id/content/images/ctc_2020021605150668915.jpg"
-              alt="Image Size 720x400"
-            />
-            <h3
-              class="tracking-widest text-indigo-500 text-xs font-medium title-font"
-            >
-              {{ `${task.owner.firstName} ${task.owner.lastName}` }}
-            </h3>
-            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-              {{ task.name }}
-            </h2>
-            <p class="leading-relaxed text-base">
-              {{ task.description }}
-            </p>
-          </div>
+          <router-link :to="'/tasks/' + task._id">
+            <div class="bg-white p-6 rounded-lg">
+              <img
+                class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72  rounded w-full object-cover object-center mb-6"
+                src="https://kuyou.id/content/images/ctc_2020021605150668915.jpg"
+                alt="Image Size 720x400"
+              />
+              <h3
+                class="tracking-widest text-indigo-500 text-xs font-medium title-font"
+              >
+                {{ `${task.owner.firstName} ${task.owner.lastName}` }}
+              </h3>
+              <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
+                {{ task.name }}
+              </h2>
+              <p class="leading-relaxed text-base">
+                {{ task.description }}
+              </p>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
