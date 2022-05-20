@@ -1,5 +1,5 @@
 <template>
-  <Nav />
+  <Navigation />
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto max-w-7x1">
       <div class="flex flex-wrap w-full mb-4 p-4">
@@ -49,12 +49,12 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useApiWithAuth } from "../modules/api";
-import Nav from "../components/Nav.vue";
+import Navigation from "../components/Navigation.vue";
 import TaskCard from "../components/TaskCard.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 export default defineComponent({
-  components: { Nav, TaskCard },
+  components: { Navigation, TaskCard },
   setup() {
     loadUser();
     const { user } = useAuth();
