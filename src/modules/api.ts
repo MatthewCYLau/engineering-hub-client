@@ -50,7 +50,6 @@ export const useApi = (endpoint: string, accessToken?: string) => {
       .finally(() => (loading.value = false));
   };
 
-  // @ts-ignore
   const del = () => {
     loading.value = true;
     error.value = undefined;
