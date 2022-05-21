@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
+import Users from "@/views/Users.vue";
 import AddTask from "@/views/AddTask.vue";
 import TaskPage from "@/views/Task.vue";
 import Home from "@/views/Home.vue";
@@ -12,6 +13,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/dashboard",
     name: "dashboard",
     component: Dashboard,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/users",
+    name: "users",
+    component: Users,
     meta: { requiresAuth: true },
   },
   {

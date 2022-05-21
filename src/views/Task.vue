@@ -1,5 +1,4 @@
 <template>
-  <Nav />
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto max-w-7x1">
       <div class="flex flex-wrap w-full mb-4 p-4">
@@ -48,11 +47,10 @@
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import { useApiWithAuth } from "../modules/api";
-import Nav from "../components/Nav.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 export default defineComponent({
-  components: { Nav },
+  components: {},
   props: ["id"],
   setup(props) {
     const router = useRouter();
