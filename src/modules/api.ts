@@ -20,6 +20,7 @@ export const useApi = (endpoint: string, accessToken?: string) => {
   const loading = ref(false);
   const error = ref();
 
+  // eslint-disable-next-line
   const post = (payload?: Record<string, any>) => {
     loading.value = true;
     error.value = undefined;
