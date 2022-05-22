@@ -6,6 +6,7 @@ import TaskPage from "@/views/Task.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
+import Success from "@/views/Success.vue";
 
 const routes: Array<RouteRecordRaw> = [
   { path: "/", name: "home", component: Home, meta: { requiresAuth: false } },
@@ -45,6 +46,12 @@ const routes: Array<RouteRecordRaw> = [
         meta: { requiresAuth: false },
       },
     },
+  },
+  {
+    path: "/success",
+    name: "success",
+    component: Success,
+    meta: { requiresAuth: true },
   },
 ];
 

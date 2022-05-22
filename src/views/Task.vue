@@ -58,7 +58,10 @@
           <div class="h-1 w-20 bg-indigo-500 rounded"></div>
         </div>
       </div>
-      <TableComponent />
+      <TableComponent
+        :columns="['Name', 'Email', 'Status']"
+        :data="data.contributors"
+      />
     </div>
   </section>
 </template>
@@ -98,7 +101,7 @@ export default defineComponent({
         userId: user?.value?.id || "",
       };
       post(paylod).then(() => {
-        router.push({ name: "dashboard" });
+        router.push({ name: "success" });
       });
     };
     return { user, data, loading, deleteTask, contributeTask };
