@@ -65,15 +65,17 @@
       </div>
       <TableComponent
         v-if="data"
-        :columns="['Name', 'Email', 'Status']"
+        :columns="['Name', 'Email', 'Status', 'Action']"
         :data="data.contributors"
+        :action="removeContributor"
+        :currentUserId="currentUserId"
       />
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useApiWithAuth } from "../modules/api";
 import TableComponent from "../components/Table.vue";
@@ -91,6 +93,8 @@ export default defineComponent({
     loadUser();
     const { user } = useAuth();
     const { loading, data, get } = useApiWithAuth(`/api/tasks/${props.id}`);
+    const currentUserId = computed(() => user?.value && user.value.id);
+
     get();
 
     const deleteTask = () => {
@@ -109,7 +113,24 @@ export default defineComponent({
         router.push({ name: "success" });
       });
     };
-    return { user, data, loading, deleteTask, contributeTask };
+
+    const removeContributor = () => {
+      const { del } = useApiWithAuth(
+        `/api/tasks/${props.id}/contributors/${currentUserId.value}`
+      );
+      del().then(() => {
+        router.push({ name: "dashboard" });
+      });
+    };
+    return {
+      user,
+      data,
+      loading,
+      deleteTask,
+      contributeTask,
+      removeContributor,
+      currentUserId,
+    };
   },
 
   onMounted() {

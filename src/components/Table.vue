@@ -48,6 +48,22 @@
                   <span class="relative">Active</span>
                 </span>
               </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <svg
+                  @click="action"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  v-if="currentUserId === datum.id"
+                >
+                  <path d="M0 0h24v24H0V0z" fill="none"></path>
+                  <path d="M8 9h8v10H8z" opacity=".3"></path>
+                  <path
+                    d="M15.5 4l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9z"
+                  ></path>
+                </svg>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -67,6 +83,14 @@ export default defineComponent({
     },
     data: {
       type: Array,
+      required: true,
+    },
+    action: {
+      type: Function,
+      required: true,
+    },
+    currentUserId: {
+      type: String,
       required: true,
     },
   },
