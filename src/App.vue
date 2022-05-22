@@ -1,23 +1,24 @@
 <template>
   <main>
+    <Navigation v-if="shouldRenderNavigation" />
     <router-view />
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from "vue";
+import { defineComponent, watch, computed } from "vue";
 import { useAuth, loadUser } from "./modules/auth";
 import { useRoute, useRouter } from "vue-router";
+import Navigation from "./components/Navigation.vue";
 
 export default defineComponent({
-  components: {  },
+  components: { Navigation },
   setup() {
     const { loading, user } = useAuth();
     const router = useRouter();
     const route = useRoute();
 
     watch([user], () => {
-      console.log(route.meta);
       if (
         loading.value === false &&
         route.meta.requiresAuth === true &&
@@ -29,7 +30,8 @@ export default defineComponent({
       } else if (loading.value !== false) router.push({ name: "login" });
     });
 
-    return { loading, user };
+    const shouldRenderNavigation = computed(() => route.meta.requiresAuth);
+    return { loading, user, shouldRenderNavigation };
   },
   mounted() {
     loadUser();

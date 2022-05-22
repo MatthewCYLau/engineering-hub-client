@@ -39,13 +39,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/register",
     component: Register,
-    meta: {
-      requiresAuth: {
-        path: "/login",
-        component: Login,
-        meta: { requiresAuth: false },
-      },
-    },
+    meta: { requiresAuth: false },
   },
   {
     path: "/success",

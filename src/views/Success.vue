@@ -1,5 +1,4 @@
 <template>
-  <Navigation />
   <section class="text-gray-600 body-font">
     <div class="bg-white p-6 md:mx-auto">
       <svg viewBox="0 0 24 24" class="text-green-600 w-16 h-16 mx-auto my-6">
@@ -29,7 +28,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Navigation from "../components/Navigation.vue";
 
-export default defineComponent({ components: { Navigation } });
+export default defineComponent({ components: {} });
 </script>

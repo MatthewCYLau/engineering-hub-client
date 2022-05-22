@@ -1,5 +1,4 @@
 <template>
-  <Navigation />
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto max-w-7x1">
       <div class="flex flex-wrap w-full mb-4 p-4">
@@ -12,7 +11,7 @@
           <div class="h-1 w-20 bg-indigo-500 rounded"></div>
         </div>
       </div>
-      <div class="flex flex-wrap -m-4">
+      <div class="flex flex-wrap -m-4" v-if="data">
         <div class="xl:w-1/3 md:w-1/2 p-4">
           <div class="bg-white p-6 rounded-lg">
             <img
@@ -59,6 +58,7 @@
         </div>
       </div>
       <TableComponent
+        v-if="data"
         :columns="['Name', 'Email', 'Status']"
         :data="data.contributors"
       />
@@ -70,7 +70,6 @@
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import { useApiWithAuth } from "../modules/api";
-import Navigation from "../components/Navigation.vue";
 import TableComponent from "../components/Table.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
@@ -79,7 +78,7 @@ interface ContributeTaskPayload {
 }
 
 export default defineComponent({
-  components: { Navigation, TableComponent },
+  components: { TableComponent },
   props: ["id"],
   setup(props) {
     const router = useRouter();

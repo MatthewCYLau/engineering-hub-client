@@ -1,5 +1,4 @@
 <template>
-  <Navigation />
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto max-w-7x1">
       <div class="flex flex-wrap w-full mb-4 p-4">
@@ -19,7 +18,7 @@
             :firstName="user.firstName"
             :lastName="user.lastName"
             :email="user.email"
-            :joinedDate="user.joinedDate"
+            :joinedDate="new Date(user.joinedDate)"
           />
         </div>
       </div>
@@ -31,11 +30,10 @@
 import { defineComponent } from "vue";
 import { useApiWithAuth } from "../modules/api";
 import UserCard from "../components/UserCard.vue";
-import Navigation from "../components/Navigation.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 export default defineComponent({
-  components: { UserCard, Navigation },
+  components: { UserCard },
   setup() {
     loadUser();
     const { user } = useAuth();
