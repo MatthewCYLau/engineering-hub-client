@@ -32,12 +32,18 @@
             </p>
             <div>
               <button
+                v-if="
+                  !data.contributors
+                    .map((contributor) => contributor.id)
+                    .includes(user.id)
+                "
                 @click="contributeTask"
                 class="text-white px-4 mt-8 w-auto h-10 bg-green-500 rounded-full hover:bg-green-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none mr-4"
               >
                 <span class="title-font font-medium">Contribute</span>
               </button>
               <button
+                v-if="user.id === data.owner.id"
                 @click="deleteTask"
                 class="text-white px-4 mt-8 w-auto h-10 bg-red-500 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
               >
