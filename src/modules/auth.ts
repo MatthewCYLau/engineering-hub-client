@@ -7,6 +7,8 @@ export const AUTH_TOKEN = "accessToken";
 interface User {
   id: string;
   email: string;
+  firstName: string;
+  lastName: string;
   joineDate: Date;
 }
 

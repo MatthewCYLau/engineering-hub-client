@@ -33,7 +33,7 @@
             <div>
               <button
                 v-if="
-                  !data.contributors
+                  !contributors
                     .map((contributor) => contributor.id)
                     .includes(user.id)
                 "
@@ -66,7 +66,7 @@
       <TableComponent
         v-if="data"
         :columns="['Name', 'Email', 'Status', 'Action']"
-        :data="data.contributors"
+        :data="contributors"
         :action="removeContributor"
         :currentUserId="currentUserId"
       />
@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, watchEffect, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useApiWithAuth } from "../modules/api";
 import TableComponent from "../components/Table.vue";
@@ -97,6 +97,12 @@ export default defineComponent({
 
     get();
 
+    const contributors = ref();
+
+    watchEffect(
+      () => data.value && (contributors.value = data.value.contributors)
+    );
+
     const deleteTask = () => {
       const { del } = useApiWithAuth(`/api/tasks/${props.id}`);
       del().then(() => {
@@ -110,7 +116,15 @@ export default defineComponent({
         userId: user?.value?.id || "",
       };
       post(paylod).then(() => {
-        router.push({ name: "success" });
+        contributors.value = [
+          ...contributors.value,
+          {
+            id: user?.value?.id,
+            email: user?.value?.email,
+            firstName: user?.value?.firstName,
+            lastName: user?.value?.lastName,
+          },
+        ];
       });
     };
 
@@ -119,7 +133,14 @@ export default defineComponent({
         `/api/tasks/${props.id}/contributors/${currentUserId.value}`
       );
       del().then(() => {
-        router.push({ name: "dashboard" });
+        contributors.value = contributors.value.filter(
+          (contributor: {
+            id: string;
+            email: string;
+            firstName: string;
+            lastName: string;
+          }) => contributor.id !== user?.value?.id
+        );
       });
     };
     return {
@@ -130,6 +151,7 @@ export default defineComponent({
       contributeTask,
       removeContributor,
       currentUserId,
+      contributors,
     };
   },
 
