@@ -41,6 +41,14 @@
                   class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
                 />
               </div>
+              <div class="flex flex-row flex-wrap gap-5 mt-8 mb-2">
+                <ThemeCard
+                  v-for="(theme, index) in themes"
+                  :key="index"
+                  :name="theme"
+                  :onClick="selecTheme"
+                />
+              </div>
               <button
                 type="submit"
                 class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300"
@@ -58,17 +66,18 @@
 <script lang="ts">
 import { defineComponent, computed, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
-
+import ThemeCard from "../components/ThemeCard.vue";
 import { useApiWithAuth } from "../modules/api";
 import { useAuth, loadUser } from "../modules/auth";
 
 interface CreateTaskPayload {
   name?: string;
   description?: string;
+  theme?: string;
 }
 
 export default defineComponent({
-  components: {},
+  components: { ThemeCard },
   setup() {
     loadUser();
     const { user } = useAuth();
@@ -81,14 +90,30 @@ export default defineComponent({
     const payload = reactive<CreateTaskPayload>({
       name: undefined,
       description: undefined,
+      theme: undefined,
     });
+
+    const themes: string[] = ["Engineering", "Writing", "Reading"];
 
     const submit = () => {
       post(payload).then(() => {
         router.push({ name: "dashboard" });
       });
     };
-    return { user, data, loading, initials, submit, ...toRefs(payload) };
+    const selecTheme = (theme: string) => {
+      console.log(theme);
+      payload.theme = theme;
+    };
+    return {
+      user,
+      data,
+      loading,
+      initials,
+      submit,
+      themes,
+      selecTheme,
+      ...toRefs(payload),
+    };
   },
   onMounted() {
     // loadUser();
