@@ -1,10 +1,14 @@
 <template>
-  <div class="flex flex-col items-center group gap-2" @click="onClick(name)">
+  <div
+    class="flex flex-col items-center group gap-2 group-hover:border-2 group-hover:border-gray-300 p-1"
+    @click="onClick(name)"
+    :class="{ 'border-2 border-indigo-500 rounded-md': isSelected }"
+  >
     <img
-      class="rounded border-2 border-transparent group-hover:border-2 group-hover:border-gray-300"
-      src="https://picsum.photos/seed/b/150/150"
+      class="rounded border-2 border-transparent w-20 h-20"
+      :src="require(`@/assets/${name}.png`)"
     />
-    <p class="text-gray-500 group-hover:text-gray-300 font-semibold">
+    <p class="text-gray-500 group-hover:text-gray-700 font-semibold">
       {{ name }}
     </p>
   </div>
@@ -21,6 +25,10 @@ export default defineComponent({
     },
     onClick: {
       type: Function,
+      required: true,
+    },
+    isSelected: {
+      type: Boolean,
       required: true,
     },
   },

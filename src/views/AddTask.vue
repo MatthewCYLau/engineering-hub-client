@@ -47,6 +47,7 @@
                   :key="index"
                   :name="theme"
                   :onClick="selecTheme"
+                  :isSelected="theme === selectedTheme"
                 />
               </div>
               <button
@@ -83,14 +84,12 @@ export default defineComponent({
     const { user } = useAuth();
     const { loading, data, post } = useApiWithAuth("/api/tasks");
 
-    const initials = computed(() => user?.value && user.value.email);
-
     const router = useRouter();
 
     const payload = reactive<CreateTaskPayload>({
       name: undefined,
       description: undefined,
-      theme: undefined,
+      theme: "Engineering",
     });
 
     const themes: string[] = ["Engineering", "Writing", "Reading"];
@@ -104,14 +103,17 @@ export default defineComponent({
       console.log(theme);
       payload.theme = theme;
     };
+
+    const selectedTheme = computed(() => payload.theme);
+
     return {
       user,
       data,
       loading,
-      initials,
       submit,
       themes,
       selecTheme,
+      selectedTheme,
       ...toRefs(payload),
     };
   },
