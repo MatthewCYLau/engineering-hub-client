@@ -37,6 +37,7 @@
             :firstName="task.owner.firstName"
             :lastName="task.owner.lastName"
             :name="task.name"
+            :theme="task.theme"
             :description="task.description"
           />
         </div>

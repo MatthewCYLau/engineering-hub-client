@@ -2,9 +2,9 @@
   <router-link :to="'/tasks/' + id">
     <div class="bg-white p-6 rounded-lg">
       <img
-        class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72  rounded w-full object-cover object-center mb-6"
-        src="https://kuyou.id/content/images/ctc_2020021605150668915.jpg"
-        alt="Image Size 720x400"
+        class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72 rounded object-center mb-6"
+        :src="require(`@/assets/${theme}.png`)"
+        alt="Task"
       />
       <h3
         class="tracking-widest text-indigo-500 text-xs font-medium title-font"
@@ -43,6 +43,10 @@ export default defineComponent({
       required: true,
     },
     description: {
+      type: String,
+      required: true,
+    },
+    theme: {
       type: String,
       required: true,
     },
