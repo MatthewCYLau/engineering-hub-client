@@ -4,6 +4,7 @@ import Users from "@/views/Users.vue";
 import TaskForm from "@/views/TaskForm.vue";
 import TaskPage from "@/views/Task.vue";
 import Home from "@/views/Home.vue";
+import Profile from "@/views/Profile.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Success from "@/views/Success.vue";
@@ -20,6 +21,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/users",
     name: "users",
     component: Users,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
     meta: { requiresAuth: true },
   },
   {
