@@ -6,7 +6,7 @@
           <h1
             class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
           >
-            Add Task
+            {{ pageHeader }}
           </h1>
           <div class="h-1 w-20 bg-indigo-500 rounded"></div>
         </div>
@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, reactive, toRefs } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import ThemeCard from "../components/ThemeCard.vue";
 import { useApiWithAuth } from "../modules/api";
 import { useAuth, loadUser } from "../modules/auth";
@@ -79,10 +79,12 @@ interface CreateTaskPayload {
 
 export default defineComponent({
   components: { ThemeCard },
-  setup() {
+  props: ["id"],
+  setup(props) {
     loadUser();
     const { user } = useAuth();
     const { loading, data, post } = useApiWithAuth("/api/tasks");
+    const { put } = useApiWithAuth(`/api/tasks/${props.id}`);
 
     const router = useRouter();
 
@@ -94,10 +96,29 @@ export default defineComponent({
 
     const themes: string[] = ["Engineering", "Writing", "Reading"];
 
-    const submit = () => {
-      post(payload).then(() => {
-        router.push({ name: "dashboard" });
+    const route = useRoute();
+    const path = computed(() => route.path);
+    const isEditMode = path.value.includes("edit");
+
+    if (isEditMode) {
+      const { get } = useApiWithAuth(`/api/tasks/${props.id}`);
+      get().then((res) => {
+        payload.name = res.name;
+        payload.description = res.description;
+        payload.theme = res.theme;
       });
+    }
+
+    const submit = () => {
+      if (isEditMode) {
+        put(payload).then(() => {
+          router.push({ name: "dashboard" });
+        });
+      } else {
+        post(payload).then(() => {
+          router.push({ name: "dashboard" });
+        });
+      }
     };
     const selecTheme = (theme: string) => {
       console.log(theme);
@@ -105,6 +126,7 @@ export default defineComponent({
     };
 
     const selectedTheme = computed(() => payload.theme);
+    const pageHeader = isEditMode ? "Edit Task" : "Add Task";
 
     return {
       user,
@@ -114,6 +136,8 @@ export default defineComponent({
       themes,
       selecTheme,
       selectedTheme,
+      isEditMode,
+      pageHeader,
       ...toRefs(payload),
     };
   },

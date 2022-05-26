@@ -66,6 +66,22 @@ export const useApi = (endpoint: string, accessToken?: string) => {
       .finally(() => (loading.value = false));
   };
 
+  // eslint-disable-next-line
+  const put = (payload?: Record<string, any>) => {
+    loading.value = true;
+    error.value = undefined;
+
+    return api
+      .put(endpoint, payload)
+      .then((res) => (data.value = res.data))
+      .catch((e) => {
+        error.value = e;
+
+        throw e;
+      })
+      .finally(() => (loading.value = false));
+  };
+
   watch([error], () => {
     // If 401 Unauthorised, force user to buy a new subscription
     if (error.value.response.status === 401 && router) {
@@ -80,6 +96,7 @@ export const useApi = (endpoint: string, accessToken?: string) => {
     get,
     post,
     del,
+    put,
   };
 };
 

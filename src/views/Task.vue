@@ -34,7 +34,7 @@
               <button
                 v-if="
                   !contributors
-                    .map((contributor) => contributor.id)
+                    .map((contributor) => contributor._id)
                     .includes(user.id)
                 "
                 @click="contributeTask"
@@ -42,6 +42,14 @@
               >
                 <span class="title-font font-medium">Contribute</span>
               </button>
+              <router-link :to="'/tasks/edit/' + props.id">
+                <button
+                  v-if="user.id === data.owner.id"
+                  class="text-white px-4 mt-8 w-auto h-10 bg-yellow-500 rounded-full hover:bg-yellow-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none mr-4"
+                >
+                  <span class="title-font font-medium">Edit</span>
+                </button>
+              </router-link>
               <button
                 v-if="user.id === data.owner.id"
                 @click="deleteTask"
@@ -152,6 +160,7 @@ export default defineComponent({
       removeContributor,
       currentUserId,
       contributors,
+      props,
     };
   },
 
