@@ -124,7 +124,7 @@
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full"
-                  :src="require(`@/assets/user.png`)"
+                  :src="require(`@/assets/${avatar}.png`)"
                   alt="user"
                 />
               </button>
@@ -218,6 +218,12 @@ import { defineComponent } from "vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 export default defineComponent({
+  props: {
+    avatar: {
+      type: String,
+      required: true,
+    },
+  },
   setup() {
     const { user, logout } = useAuth();
     const logoutUser = () => logout();

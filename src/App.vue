@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Navigation v-if="shouldRenderNavigation" />
+    <Navigation v-if="shouldRenderNavigation" :avatar="avatar" />
     <router-view />
   </main>
 </template>
@@ -31,7 +31,9 @@ export default defineComponent({
     });
 
     const shouldRenderNavigation = computed(() => route.meta.requiresAuth);
-    return { loading, user, shouldRenderNavigation };
+    const avatar = computed(() => user?.value?.avatar || "user");
+
+    return { loading, user, shouldRenderNavigation, avatar };
   },
   mounted() {
     loadUser();
