@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
 import Users from "@/views/Users.vue";
 import TaskForm from "@/views/TaskForm.vue";
+import EditProfile from "@/views/EditProfile.vue";
 import TaskPage from "@/views/Task.vue";
 import Home from "@/views/Home.vue";
 import Profile from "@/views/Profile.vue";
@@ -27,6 +28,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/profile",
     name: "profile",
     component: Profile,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/profile/edit",
+    name: "editProfile",
+    component: EditProfile,
     meta: { requiresAuth: true },
   },
   {

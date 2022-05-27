@@ -215,7 +215,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useAuth, loadUser } from "../modules/auth";
+import { useAuth } from "../modules/auth";
 
 export default defineComponent({
   props: {
@@ -235,7 +235,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    loadUser();
+    // loadUser();
   },
 });
 </script>

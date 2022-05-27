@@ -42,7 +42,7 @@
                 />
               </div>
               <div class="flex flex-row flex-wrap gap-5 mt-8 mb-2">
-                <ThemeCard
+                <ImageCard
                   v-for="(theme, index) in themes"
                   :key="index"
                   :name="theme"
@@ -67,9 +67,9 @@
 <script lang="ts">
 import { defineComponent, computed, reactive, toRefs } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import ThemeCard from "../components/ThemeCard.vue";
+import ImageCard from "../components/ImageCard.vue";
 import { useApiWithAuth } from "../modules/api";
-import { useAuth, loadUser } from "../modules/auth";
+import { useAuth } from "../modules/auth";
 
 interface CreateTaskPayload {
   name?: string;
@@ -78,10 +78,10 @@ interface CreateTaskPayload {
 }
 
 export default defineComponent({
-  components: { ThemeCard },
+  components: { ImageCard },
   props: ["id"],
   setup(props) {
-    loadUser();
+    // loadUser();
     const { user } = useAuth();
     const { loading, data, post } = useApiWithAuth("/api/tasks");
     const { put } = useApiWithAuth(`/api/tasks/${props.id}`);
