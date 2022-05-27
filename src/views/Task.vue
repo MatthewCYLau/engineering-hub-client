@@ -131,6 +131,7 @@ export default defineComponent({
             email: user?.value?.email,
             firstName: user?.value?.firstName,
             lastName: user?.value?.lastName,
+            avatar: user?.value?.avatar,
           },
         ];
       });

@@ -29,7 +29,7 @@ export const loadUser = () => {
   // Read access token from local storage?
   const token = window.localStorage.getItem(AUTH_KEY);
   if (token) {
-    const { loading, error, data, get } = useApi("/api/auth");
+    const { loading, error, data, get } = useApi("/api/users/me");
     state.loading = true;
 
     get({ headers: { "x-auth-token": token } });
@@ -38,7 +38,7 @@ export const loadUser = () => {
       if (error.value) {
         window.localStorage.removeItem(AUTH_KEY);
       } else if (data.value) {
-        state.user = data.value["currentUser"];
+        state.user = data.value;
       }
 
       state.loading = false;

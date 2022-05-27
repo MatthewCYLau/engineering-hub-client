@@ -21,7 +21,7 @@
                   <div class="flex-shrink-0 w-10 h-10">
                     <img
                       class="w-full h-full rounded-full"
-                      :src="require(`@/assets/user.png`)"
+                      :src="require(`@/assets/${datum.avatar}.png`)"
                       alt="avatar"
                     />
                   </div>
