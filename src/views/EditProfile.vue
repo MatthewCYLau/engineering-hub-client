@@ -84,6 +84,11 @@
                   class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
                 />
               </div>
+              <Dropdown
+                :options="statuses"
+                :onClick="selecStatus"
+                :selectedOption="selectedStatus"
+              />
               <div class="flex flex-row flex-wrap gap-5 mt-8 mb-2">
                 <ImageCard
                   v-for="(avatar, index) in avatars"
@@ -111,6 +116,7 @@
 import { defineComponent, computed, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
 import ImageCard from "../components/ImageCard.vue";
+import Dropdown from "../components/Dropdown.vue";
 import { useApiWithAuth } from "../modules/api";
 import { useAuth } from "../modules/auth";
 
@@ -126,11 +132,11 @@ interface EditProfilePayload {
   bio?: string;
   team?: string;
   location?: string;
-  avatar?: Avatar | undefined;
+  avatar?: Avatar;
 }
 
 export default defineComponent({
-  components: { ImageCard },
+  components: { ImageCard, Dropdown },
   setup() {
     const { user } = useAuth();
     const payload = reactive<EditProfilePayload>({
@@ -149,6 +155,7 @@ export default defineComponent({
     const { put } = useApiWithAuth(`/api/users/${userId.value}`);
     const router = useRouter();
     const avatars: Avatar[] = ["man", "woman", "user"];
+    const statuses: Status[] = ["Active", "Busy"];
 
     get().then((res) => {
       payload.email = res.email;
@@ -171,12 +178,21 @@ export default defineComponent({
     };
     const selectedAvatar = computed(() => payload.avatar);
 
+    const selecStatus = (status: Status) => {
+      payload.status = status;
+    };
+
+    const selectedStatus = computed(() => payload.status);
+
     return {
       user,
       avatars,
       submit,
       selectAvatar,
       selectedAvatar,
+      statuses,
+      selecStatus,
+      selectedStatus,
       ...toRefs(payload),
     };
   },

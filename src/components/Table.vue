@@ -43,9 +43,13 @@
                 >
                   <span
                     aria-hidden
-                    class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                    class="absolute inset-0 opacity-50 rounded-full"
+                    :class="{
+                      'bg-green-200': datum.status === 'Active',
+                      'bg-red-200': datum.status === 'Busy',
+                    }"
                   ></span>
-                  <span class="relative">Active</span>
+                  <span class="relative">{{ datum.status }}</span>
                 </span>
               </td>
               <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">

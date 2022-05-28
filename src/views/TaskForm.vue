@@ -121,7 +121,6 @@ export default defineComponent({
       }
     };
     const selecTheme = (theme: string) => {
-      console.log(theme);
       payload.theme = theme;
     };
 
