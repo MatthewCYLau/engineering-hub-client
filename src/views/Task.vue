@@ -1,4 +1,9 @@
 <template>
+  <Modal
+    v-if="isModalVisible"
+    :onConfirm="deleteTask"
+    :message="'Are you sure you want to delete this task?'"
+  />
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto max-w-7x1">
       <div class="flex flex-wrap w-full mb-4 p-4">
@@ -52,7 +57,7 @@
               </router-link>
               <button
                 v-if="user.id === data.owner.id"
-                @click="deleteTask"
+                @click="toggleModal"
                 class="text-white px-4 mt-8 w-auto h-10 bg-red-500 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
               >
                 <span class="title-font font-medium">Delete</span>
@@ -86,7 +91,9 @@
 import { defineComponent, computed, watchEffect, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useApiWithAuth } from "../modules/api";
+import { useModal } from "../modules/modal";
 import TableComponent from "../components/Table.vue";
+import Modal from "../components/Modal.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 interface ContributeTaskPayload {
@@ -94,12 +101,13 @@ interface ContributeTaskPayload {
 }
 
 export default defineComponent({
-  components: { TableComponent },
+  components: { TableComponent, Modal },
   props: ["id"],
   setup(props) {
     const router = useRouter();
     loadUser();
     const { user } = useAuth();
+    const { toggleModal, isModalVisible } = useModal();
     const { loading, data, get } = useApiWithAuth(`/api/tasks/${props.id}`);
     const currentUserId = computed(() => user?.value && user.value.id);
 
@@ -131,6 +139,7 @@ export default defineComponent({
             email: user?.value?.email,
             firstName: user?.value?.firstName,
             lastName: user?.value?.lastName,
+            status: user?.value?.status,
             avatar: user?.value?.avatar,
           },
         ];
@@ -162,6 +171,8 @@ export default defineComponent({
       currentUserId,
       contributors,
       props,
+      isModalVisible,
+      toggleModal,
     };
   },
 

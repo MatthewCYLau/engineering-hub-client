@@ -10,6 +10,7 @@ interface User {
   firstName: string;
   lastName: string;
   joineDate: Date;
+  status: string;
   avatar: string;
 }
 
