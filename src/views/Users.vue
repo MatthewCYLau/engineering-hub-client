@@ -19,6 +19,11 @@
             :lastName="user.lastName"
             :email="user.email"
             :joinedDate="new Date(user.joinedDate)"
+            :location="user.location"
+            :bio="user.bio"
+            :status="user.status"
+            :team="user.team"
+            :avatar="user.avatar"
           />
         </div>
       </div>
