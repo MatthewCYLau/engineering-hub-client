@@ -4,9 +4,9 @@
       class="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-600 i justify-around items-center"
     >
       <div>
-        <h1 class="text-white font-bold text-4xl font-sans">GoFinance</h1>
+        <h1 class="text-white font-bold text-4xl font-sans">Engineering Hub</h1>
         <p class="text-white mt-1">
-          The most popular peer to peer lending at SEA
+          Create, read, update, and delete your tasks
         </p>
         <button
           type="submit"

@@ -1,124 +1,187 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-    <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-      <form @submit.prevent="submit">
-        <h1 class="font-bold text-center text-2xl mb-5">Engineering Hub</h1>
+  <div class="h-screen flex">
+    <div
+      class="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-600 i justify-around items-center"
+    >
+      <div>
+        <h1 class="text-white font-bold text-4xl font-sans">Engineering Hub</h1>
+        <p class="text-white mt-1">
+          Create, read, update, and delete your tasks
+        </p>
+        <button
+          type="submit"
+          class="block w-28 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2"
+        >
+          Read More
+        </button>
+      </div>
+    </div>
+    <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+      <div class="flex-1">
+        <div>
+          <h1 class="text-gray-800 font-bold text-2xl mb-1">Sign Up!</h1>
 
-        <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-          <div class="px-5 py-7">
-            <label class="font-semibold text-sm text-gray-600 pb-1 block"
-              >E-mail</label
-            >
-
-            <input
-              aria-label="Email address"
-              name="email"
-              type="email"
-              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
-              placeholder="Email address"
-              v-model="email"
-            />
-            <label class="font-semibold text-sm text-gray-600 pb-1 block"
-              >First name</label
-            >
-
-            <input
-              aria-label="First name"
-              name="firstName"
-              type="text"
-              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
-              placeholder="First name"
-              v-model="firstName"
-            />
-            <label class="font-semibold text-sm text-gray-600 pb-1 block"
-              >Last name</label
-            >
-
-            <input
-              aria-label="Last name"
-              name="lastName"
-              type="text"
-              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
-              placeholder="Last name"
-              v-model="lastName"
-            />
-            <label class="font-semibold text-sm text-gray-600 pb-1 block"
-              >Password</label
-            >
-            <input
-              aria-label="Password"
-              name="password"
-              type="password"
-              class="border rounded-lg px-3 py-2 mt-1 mb-4 text-sm w-full"
-              placeholder="Password"
-              v-model="password"
-            />
-            <label class="font-semibold text-sm text-gray-600 pb-1 block"
-              >Joined Date</label
-            >
-            <div class="-mt-px mb-4">
-              <input
-                aria-label="Joined Date"
-                name="joinedDate"
-                type="date"
-                class="appearance-none rounded-lg  relative block w-full px-3 py-2 border placeholder-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
-                placeholder="Joined Date"
-                v-model="joinedDate"
-              />
-            </div>
-
-            <button
-              type="submit"
-              class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-            >
-              <span class="inline-block mr-2">Sign Up</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                class="w-4 h-4 inline-block"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </button>
-          </div>
+          <p class="mt-3 text-gray-500 dark:text-gray-300">
+            Sign up to create your account
+          </p>
         </div>
-        <div class="py-5">
-          <div class="grid grid-cols-2 gap-1">
-            <div class="text-center sm:text-left whitespace-nowrap">
-              <button
-                class="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
+
+        <div class="mt-8">
+          <form @submit.prevent="submit">
+            <div>
+              <label
+                for="email"
+                class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                >Email Address</label
+              >
+              <div
+                class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  class="w-4 h-4 inline-block align-text-top"
                 >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
                   />
                 </svg>
-                <router-link to="/"
-                  ><span class="inline-block ml-1"
-                    >Back to home</span
-                  ></router-link
+                <input
+                  class="pl-2 outline-none border-none w-full"
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="hello@example.com"
+                  v-model="email"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="firstName"
+                class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                >First Name</label
+              >
+              <div
+                class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4"
+              >
+                <input
+                  class="pl-2 outline-none border-none w-full"
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  placeholder="Jon"
+                  v-model="firstName"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="lastName"
+                class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                >Last Name</label
+              >
+              <div
+                class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4"
+              >
+                <input
+                  class="pl-2 outline-none border-none w-full"
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Doe"
+                  v-model="lastName"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="joinedDate"
+                class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                >Joined Date</label
+              >
+              <div
+                class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4"
+              >
+                <input
+                  class="pl-2 outline-none border-none w-full"
+                  type="date"
+                  name="joinedDate"
+                  id="joinedDate"
+                  placeholder="01/10/2021"
+                  v-model="joinedDate"
+                />
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <div class="flex justify-between mb-2">
+                <label
+                  for="password"
+                  class="text-sm text-gray-600 dark:text-gray-200"
+                  >Password</label
                 >
+              </div>
+
+              <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-gray-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <input
+                  class="pl-2 outline-none border-none w-full"
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  v-model="password"
+                />
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <button
+                type="submit"
+                class="block w-full bg-indigo-600 hover:bg-indigo-500 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+              >
+                Sign Up
               </button>
             </div>
-          </div>
+          </form>
+
+          <p class="mt-6 text-sm text-center text-gray-400">
+            Already has an account?
+            <router-link to="/login"
+              ><span
+                class="text-blue-500 focus:outline-none focus:underline hover:underline"
+                >Login</span
+              ></router-link
+            >
+          </p>
+          <p class="mt-6 text-sm text-center text-gray-400">
+            Back to
+            <router-link to="/"
+              ><span
+                class="text-blue-500 focus:outline-none focus:underline hover:underline"
+                >Home</span
+              ></router-link
+            >
+          </p>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
