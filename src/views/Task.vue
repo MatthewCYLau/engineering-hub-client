@@ -39,7 +39,7 @@
               <button
                 v-if="
                   !contributors
-                    .map((contributor) => contributor._id)
+                    .map((contributor) => contributor.id)
                     .includes(user.id)
                 "
                 @click="contributeTask"
