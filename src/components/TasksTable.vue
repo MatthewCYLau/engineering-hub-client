@@ -15,7 +15,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="datum in data" :key="datum.id">
+            <tr
+              v-for="datum in data"
+              :key="datum._id"
+              @click="redirect(datum._id)"
+              class="cursor-pointer"
+            >
               <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <p class="text-gray-900 whitespace-no-wrap">
                   {{ datum.name }}
@@ -49,10 +54,17 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+import { useRouter } from "vue-router";
 import AvatarPill from "../components/AvatarPill.vue";
 
 export default defineComponent({
   components: { AvatarPill },
+  setup() {
+    const router = useRouter();
+    const redirect = (taskId: string) =>
+      router.push({ path: `/tasks/${taskId}` });
+    return { redirect };
+  },
   props: {
     columns: {
       type: Array as PropType<Array<string>>,

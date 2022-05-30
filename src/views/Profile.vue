@@ -2,7 +2,7 @@
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto max-w-7x1" v-if="userData">
       <div>
-        <div class="sm:flex space-x-7 md:items-start items-center">
+        <div class="sm:flex space-x-7 md:items-start items-center mb-4">
           <div class="mb-4">
             <img
               class="rounded-md md:w-80"
@@ -66,6 +66,24 @@
             </router-link>
           </div>
         </div>
+        <div style="border-bottom: 2px solid #eaeaea">
+          <ul class="flex cursor-pointer">
+            <li
+              class="py-2 px-6 rounded-t-lg"
+              :class="{ 'bg-gray-200': selectedTab === 'Your tasks' }"
+              @click="selectedTab = 'Your tasks'"
+            >
+              Your tasks
+            </li>
+            <li
+              class="py-2 px-6 rounded-t-lg text-gray-500"
+              @click="selectedTab = 'Your contributions'"
+              :class="{ 'bg-gray-200': selectedTab === 'Your contributions' }"
+            >
+              Your contributions
+            </li>
+          </ul>
+        </div>
         <div class="flex flex-wrap w-full mb-4 p-4">
           <div class="w-full mb-6 lg:mb-0">
             <h1
@@ -109,6 +127,11 @@ export default defineComponent({
   },
   onMounted() {
     // loadUser();
+  },
+  data() {
+    return {
+      selectedTab: "Your tasks",
+    };
   },
 });
 </script>
