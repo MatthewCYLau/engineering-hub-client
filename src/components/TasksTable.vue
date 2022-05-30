@@ -35,6 +35,7 @@
                     :avatar="contributor.avatar"
                     :firstName="contributor.firstName"
                     :lastName="contributor.lastName"
+                    class="mb-2"
                   />
                 </template>
               </td>
