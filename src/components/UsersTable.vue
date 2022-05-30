@@ -17,20 +17,11 @@
           <tbody>
             <tr v-for="datum in data" :key="datum.id">
               <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <div class="flex items-center">
-                  <div class="flex-shrink-0 w-10 h-10">
-                    <img
-                      class="w-full h-full rounded-full"
-                      :src="require(`@/assets/${datum.avatar}.png`)"
-                      alt="avatar"
-                    />
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-gray-900 whitespace-no-wrap">
-                      {{ `${datum.firstName} ${datum.lastName}` }}
-                    </p>
-                  </div>
-                </div>
+                <AvatarPill
+                  :avatar="datum.avatar"
+                  :firstName="datum.firstName"
+                  :lastName="datum.lastName"
+                />
               </td>
               <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <p class="text-gray-900 whitespace-no-wrap">
@@ -78,8 +69,10 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+import AvatarPill from "../components/AvatarPill.vue";
 
 export default defineComponent({
+  components: { AvatarPill },
   props: {
     columns: {
       type: Array as PropType<Array<string>>,

@@ -76,7 +76,7 @@
           <div class="h-1 w-20 bg-indigo-500 rounded"></div>
         </div>
       </div>
-      <TableComponent
+      <UsersTable
         v-if="data"
         :columns="['Name', 'Email', 'Status', 'Action']"
         :data="contributors"
@@ -92,7 +92,7 @@ import { defineComponent, computed, watchEffect, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useApiWithAuth } from "../modules/api";
 import { useModal } from "../modules/modal";
-import TableComponent from "../components/Table.vue";
+import UsersTable from "../components/UsersTable.vue";
 import Modal from "../components/Modal.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
@@ -101,7 +101,7 @@ interface ContributeTaskPayload {
 }
 
 export default defineComponent({
-  components: { TableComponent, Modal },
+  components: { UsersTable, Modal },
   props: ["id"],
   setup(props) {
     const router = useRouter();

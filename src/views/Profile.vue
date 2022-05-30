@@ -1,12 +1,12 @@
 <template>
   <section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto max-w-7x1" v-if="data">
+    <div class="container px-5 py-24 mx-auto max-w-7x1" v-if="userData">
       <div>
         <div class="sm:flex space-x-7 md:items-start items-center">
           <div class="mb-4">
             <img
               class="rounded-md md:w-80"
-              :src="require(`@/assets/${data.avatar}.png`)"
+              :src="require(`@/assets/${userData.avatar}.png`)"
               alt="avatar"
             />
           </div>
@@ -14,11 +14,13 @@
             <h1
               class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
             >
-              {{ `${data.firstName} ${data.lastName}` }}
+              {{ `${userData.firstName} ${userData.lastName}` }}
             </h1>
             <div class="h-1 w-20 bg-indigo-500 rounded"></div>
             <p class="text-base tracking-wide mb-6 md:max-w-lg mt-8">
-              {{ data.bio ? data.bio : "Add something about yourself!" }}
+              {{
+                userData.bio ? userData.bio : "Add something about yourself!"
+              }}
             </p>
             <div class="flex items-center mt-4 text-gray-700">
               <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
@@ -32,7 +34,7 @@
                 </g>
               </svg>
               <h1 class="px-2 text-sm">
-                {{ data.team ? data.team : "Add your team!" }}
+                {{ userData.team ? userData.team : "Add your team!" }}
               </h1>
             </div>
             <div class="flex items-center mt-4 text-gray-700">
@@ -42,7 +44,9 @@
                 />
               </svg>
               <h1 class="px-2 text-sm">
-                {{ data.location ? data.location : "Add your location!" }}
+                {{
+                  userData.location ? userData.location : "Add your location!"
+                }}
               </h1>
             </div>
             <div class="flex items-center mt-4 text-gray-700">
@@ -51,7 +55,7 @@
                   d="M437.332 80H74.668C51.199 80 32 99.198 32 122.667v266.666C32 412.802 51.199 432 74.668 432h362.664C460.801 432 480 412.802 480 389.333V122.667C480 99.198 460.801 80 437.332 80zM432 170.667L256 288 80 170.667V128l176 117.333L432 128v42.667z"
                 />
               </svg>
-              <h1 class="px-2 text-sm">{{ data.email }}</h1>
+              <h1 class="px-2 text-sm">{{ userData.email }}</h1>
             </div>
             <router-link to="/profile/edit">
               <button
@@ -72,7 +76,11 @@
             <div class="h-1 w-20 bg-indigo-500 rounded"></div>
           </div>
         </div>
-        <TableComponent :columns="['Task', 'Owner', 'Role']" />
+        <TasksTable
+          v-if="tasks"
+          :columns="['Name', 'Description', 'Contributors']"
+          :data="tasks"
+        />
       </div>
     </div>
   </section>
@@ -80,15 +88,24 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import TasksTable from "../components/TasksTable.vue";
 import { useApiWithAuth } from "../modules/api";
 
 export default defineComponent({
-  components: {},
+  components: { TasksTable },
   setup() {
-    const { loading, data, get } = useApiWithAuth("/api/users/me");
+    const {
+      loading,
+      data: userData,
+      get: getCurrentUser,
+    } = useApiWithAuth("/api/users/me");
 
-    get();
-    return { data, loading };
+    const { data: tasks, get: getCurrentUserTasks } =
+      useApiWithAuth("/api/tasks/me");
+
+    getCurrentUser();
+    getCurrentUserTasks();
+    return { userData, loading, tasks };
   },
   onMounted() {
     // loadUser();
