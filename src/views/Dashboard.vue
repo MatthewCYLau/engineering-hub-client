@@ -31,7 +31,11 @@
         </div>
       </div>
       <div class="flex flex-wrap -m-4">
-        <div class="xl:w-1/3 md:w-1/2 p-4" v-for="task in data" :key="task._id">
+        <div
+          class="xl:w-1/3 md:w-1/2 p-4"
+          v-for="task in data.tasks"
+          :key="task._id"
+        >
           <TaskCard
             :id="task._id"
             :firstName="task.owner.firstName"

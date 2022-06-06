@@ -95,9 +95,9 @@
           </div>
         </div>
         <TasksTable
-          v-if="tasks"
+          v-if="tasksData"
           :columns="['Name', 'Description', 'Contributors']"
-          :data="tasks"
+          :data="tasksData.tasks"
         />
       </div>
     </div>
@@ -118,12 +118,12 @@ export default defineComponent({
       get: getCurrentUser,
     } = useApiWithAuth("/api/users/me");
 
-    const { data: tasks, get: getCurrentUserTasks } =
+    const { data: tasksData, get: getCurrentUserTasks } =
       useApiWithAuth("/api/tasks/me");
 
     getCurrentUser();
     getCurrentUserTasks();
-    return { userData, loading, tasks };
+    return { userData, loading, tasksData };
   },
   onMounted() {
     // loadUser();
