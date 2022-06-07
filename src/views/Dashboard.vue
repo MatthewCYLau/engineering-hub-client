@@ -51,11 +51,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch } from "vue";
+import { defineComponent, computed, watch, reactive } from "vue";
 import { useApiWithAuth } from "../modules/api";
 import TaskCard from "../components/TaskCard.vue";
 import { useAuth, loadUser } from "../modules/auth";
+import constants from "../modules/constants";
 import { usePagination } from "../modules/pagination";
+
+interface Pagination {
+  currentPage: number;
+}
 
 export default defineComponent({
   components: { TaskCard },
@@ -63,7 +68,14 @@ export default defineComponent({
     loadUser();
     const { user } = useAuth();
     const { setItemsCount, itemsCount } = usePagination();
-    const { loading, data, get } = useApiWithAuth("/api/tasks");
+    const paginationState = reactive<Pagination>({
+      currentPage: 1,
+    });
+    const { loading, data, get } = useApiWithAuth(
+      `/api/tasks?pageSize=${constants.PAGE_SIZE.toString()}&page=${
+        paginationState.currentPage
+      }`
+    );
 
     get();
     const initials = computed(() => user?.value && user.value.email);
