@@ -33,7 +33,7 @@
       <div class="flex flex-wrap -m-4">
         <div
           class="xl:w-1/3 md:w-1/2 p-4"
-          v-for="task in data.tasks"
+          v-for="task in tasks"
           :key="task._id"
         >
           <TaskCard
@@ -51,21 +51,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, watch } from "vue";
 import { useApiWithAuth } from "../modules/api";
 import TaskCard from "../components/TaskCard.vue";
 import { useAuth, loadUser } from "../modules/auth";
+import { usePagination } from "../modules/pagination";
 
 export default defineComponent({
   components: { TaskCard },
   setup() {
     loadUser();
     const { user } = useAuth();
+    const { setItemsCount, itemsCount } = usePagination();
     const { loading, data, get } = useApiWithAuth("/api/tasks");
 
     get();
     const initials = computed(() => user?.value && user.value.email);
-    return { user, data, loading, initials };
+    const tasks = computed(() => data.value && data.value.tasks);
+
+    watch([data], () => {
+      if (data.value) {
+        setItemsCount(data.value.tasksCount);
+        console.log(itemsCount.value);
+      }
+    });
+    console.log(itemsCount.value);
+    return { user, tasks, loading, initials };
   },
   onMounted() {
     // loadUser();
