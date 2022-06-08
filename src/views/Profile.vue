@@ -89,15 +89,19 @@
             <h1
               class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
             >
-              Your Tasks
+              {{
+                selectedTab === "Your tasks"
+                  ? "Your tasks"
+                  : "Your contributions"
+              }}
             </h1>
             <div class="h-1 w-20 bg-indigo-500 rounded"></div>
           </div>
         </div>
         <TasksTable
-          v-if="tasksData"
+          v-if="myTasks"
           :columns="['Name', 'Description', 'Contributors']"
-          :data="tasksData.tasks"
+          :data="selectedTab === 'Your tasks' ? tasks : contributions"
         />
       </div>
     </div>
@@ -105,10 +109,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed, reactive, toRefs, watch } from "vue";
 import TasksTable from "../components/TasksTable.vue";
 import { useApiWithAuth } from "../modules/api";
+import { useAuth } from "../modules/auth";
+import { Task } from "../interfaces/types";
 
+interface ProfilePageState {
+  tasks: Task[];
+  contributions: Task[];
+}
 export default defineComponent({
   components: { TasksTable },
   setup() {
@@ -118,12 +128,39 @@ export default defineComponent({
       get: getCurrentUser,
     } = useApiWithAuth("/api/users/me");
 
-    const { data: tasksData, get: getCurrentUserTasks } =
-      useApiWithAuth("/api/tasks/me");
+    const { user } = useAuth();
+    const profilePageState = reactive<ProfilePageState>({
+      tasks: [],
+      contributions: [],
+    });
+
+    const { get: getCurrentUserTasks } = useApiWithAuth("/api/tasks/me");
 
     getCurrentUser();
-    getCurrentUserTasks();
-    return { userData, loading, tasksData };
+    getCurrentUserTasks().then((data) => (profilePageState.tasks = data.tasks));
+
+    watch([user], () => {
+      if (user?.value && user.value.id) {
+        const currentUserId = user.value.id;
+        const { get: getCurrentUserContributions } = useApiWithAuth(
+          `/api/tasks/?contributor=${currentUserId}`
+        );
+        getCurrentUserContributions().then(
+          (data) => (profilePageState.contributions = data.tasks)
+        );
+      }
+    });
+
+    const myTasks = computed(() => profilePageState.tasks);
+    const myContributions = computed(() => profilePageState.contributions);
+
+    return {
+      userData,
+      loading,
+      myTasks,
+      myContributions,
+      ...toRefs(profilePageState),
+    };
   },
   onMounted() {
     // loadUser();
