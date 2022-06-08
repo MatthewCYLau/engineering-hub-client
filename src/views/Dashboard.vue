@@ -116,11 +116,12 @@ import { useApiWithAuth } from "../modules/api";
 import TaskCard from "../components/TaskCard.vue";
 import { useAuth, loadUser } from "../modules/auth";
 import constants from "../modules/constants";
+import { Task } from "../interfaces/types";
 import { usePagination } from "../modules/pagination";
 
 interface DashboardState {
   currentPage: number;
-  currentTasks: any[];
+  currentTasks: Task[];
 }
 
 export default defineComponent({
