@@ -94,6 +94,12 @@
                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
               />
             </svg>
+            <div
+              v-if="userNotificationsCount > 0"
+              class="absolute top-1 right-10 px-1.5 py-0.5 bg-yellow-500 rounded-full text-xs text-white"
+            >
+              {{ userNotificationsCount }}
+            </div>
           </button>
 
           <!-- Profile dropdown -->
@@ -189,8 +195,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs, computed } from "vue";
 import { useAuth } from "../modules/auth";
+
+interface NavigationState {
+  notificationsCount: number;
+}
 
 export default defineComponent({
   props: {
@@ -202,7 +212,20 @@ export default defineComponent({
   setup() {
     const { user, logout } = useAuth();
     const logoutUser = () => logout();
-    return { user, logoutUser };
+
+    const navigationState = reactive<NavigationState>({
+      notificationsCount: 10,
+    });
+
+    const userNotificationsCount = computed(
+      () => navigationState.notificationsCount
+    );
+    return {
+      user,
+      logoutUser,
+      userNotificationsCount,
+      ...toRefs(navigationState),
+    };
   },
   data() {
     return {
