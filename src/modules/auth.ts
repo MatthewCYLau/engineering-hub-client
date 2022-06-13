@@ -1,18 +1,9 @@
 import { reactive, toRefs, watch } from "vue";
 import { useApi } from "./api";
+import { User } from "../interfaces/types";
 
 const AUTH_KEY = "token";
 export const AUTH_TOKEN = "accessToken";
-
-interface User {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  joineDate: Date;
-  status: string;
-  avatar: string;
-}
 
 interface AuthState {
   loading: boolean;

@@ -197,9 +197,11 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed } from "vue";
 import { useAuth } from "../modules/auth";
+import { Notification } from "../interfaces/types";
 
 interface NavigationState {
   notificationsCount: number;
+  notifications: Notification[];
 }
 
 export default defineComponent({
@@ -215,6 +217,7 @@ export default defineComponent({
 
     const navigationState = reactive<NavigationState>({
       notificationsCount: 10,
+      notifications: [],
     });
 
     const userNotificationsCount = computed(

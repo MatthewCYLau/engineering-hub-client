@@ -18,8 +18,9 @@ export enum Avatar {
 }
 
 export interface User {
+  id: string;
   email: string;
-  password: string;
+  password?: string;
   firstName: string;
   lastName: string;
   joinedDate: Date;
@@ -28,4 +29,21 @@ export interface User {
   team: string;
   location: string;
   avatar: Avatar;
+}
+
+enum EventType {
+  DELETED = "Delete",
+  NEW_CONTRIBUTOR = "New contributor",
+}
+
+enum Entity {
+  TASK = "Task",
+}
+export interface Notification {
+  entity: Entity;
+  entityId: string;
+  eventType: EventType;
+  actor: User;
+  isRead: boolean;
+  notifier: User;
 }
