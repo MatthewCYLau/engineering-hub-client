@@ -95,10 +95,10 @@
               />
             </svg>
             <div
-              v-if="userNotificationsCount > 0"
+              v-if="notificationsCount > 0"
               class="absolute top-1 right-10 px-1.5 py-0.5 bg-yellow-500 rounded-full text-xs text-white"
             >
-              {{ userNotificationsCount }}
+              {{ notificationsCount }}
             </div>
           </button>
 
@@ -197,6 +197,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed } from "vue";
 import { useAuth } from "../modules/auth";
+import { useApiWithAuth } from "../modules/api";
 import { Notification } from "../interfaces/types";
 
 interface NavigationState {
@@ -216,9 +217,18 @@ export default defineComponent({
     const logoutUser = () => logout();
 
     const navigationState = reactive<NavigationState>({
-      notificationsCount: 10,
+      notificationsCount: 0,
       notifications: [],
     });
+
+    const fetchData = (): void => {
+      const { get } = useApiWithAuth("/api/notifications/me");
+      get().then((data) => {
+        navigationState.notifications = data.notifications;
+        navigationState.notificationsCount = data.notificationsCount;
+      });
+    };
+    fetchData();
 
     const userNotificationsCount = computed(
       () => navigationState.notificationsCount
