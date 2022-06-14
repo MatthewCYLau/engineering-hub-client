@@ -129,32 +129,17 @@
               tabindex="-1"
               v-if="showMenu"
             >
-              <!-- Active: "bg-gray-100", Not Active: "" -->
-              <a
-                href="/profile"
-                class="block px-4 py-2 text-sm text-gray-700"
-                role="menuitem"
-                tabindex="-1"
-                id="user-menu-item-0"
-                >Your Profile</a
+              <template
+                v-for="(navDropdownItem, index) in navDropdownItems"
+                :key="index"
               >
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700"
-                role="menuitem"
-                tabindex="-1"
-                id="user-menu-item-1"
-                >Settings</a
-              >
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700"
-                role="menuitem"
-                tabindex="-1"
-                id="user-menu-item-2"
-                @click="logoutUser"
-                >Sign out</a
-              >
+                <NavDropdownItem
+                  :id="index.toString()"
+                  :href="navDropdownItem.href"
+                  :text="navDropdownItem.text"
+                  :onClick="navDropdownItem.onClick"
+                />
+              </template>
             </div>
           </div>
         </div>
@@ -196,6 +181,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed } from "vue";
+import NavDropdownItem from "../components/NavDropdownItem.vue";
 import { useAuth } from "../modules/auth";
 import { useApiWithAuth } from "../modules/api";
 import { Notification } from "../interfaces/types";
@@ -205,7 +191,14 @@ interface NavigationState {
   notifications: Notification[];
 }
 
+interface INavDropdownItem {
+  text: string;
+  href: string;
+  onClick: () => void;
+}
+
 export default defineComponent({
+  components: { NavDropdownItem },
   props: {
     avatar: {
       type: String,
@@ -233,10 +226,29 @@ export default defineComponent({
     const userNotificationsCount = computed(
       () => navigationState.notificationsCount
     );
+
+    const navDropdownItems: INavDropdownItem[] = [
+      {
+        text: "Your Profile",
+        href: "/profile",
+        onClick: () => undefined,
+      },
+      {
+        text: "Setting",
+        href: "#",
+        onClick: () => undefined,
+      },
+      {
+        text: "Sign out",
+        href: "/#",
+        onClick: logoutUser,
+      },
+    ];
+
     return {
       user,
-      logoutUser,
       userNotificationsCount,
+      navDropdownItems,
       ...toRefs(navigationState),
     };
   },
