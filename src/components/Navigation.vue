@@ -111,7 +111,7 @@
                 id="user-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
-                @click="showMenu = !showMenu"
+                @click="handleOnProfileButtonClick"
               >
                 <span class="sr-only">Open user menu</span>
                 <img
@@ -127,7 +127,7 @@
               aria-orientation="vertical"
               aria-labelledby="user-menu-button"
               tabindex="-1"
-              v-if="showMenu"
+              v-if="showNavMenu"
             >
               <template
                 v-for="(navDropdownItem, index) in navDropdownItems"
@@ -189,6 +189,8 @@ import { Notification } from "../interfaces/types";
 interface NavigationState {
   notificationsCount: number;
   notifications: Notification[];
+  showNotificationsMenu: boolean;
+  showNavMenu: boolean;
 }
 
 interface INavDropdownItem {
@@ -212,6 +214,8 @@ export default defineComponent({
     const navigationState = reactive<NavigationState>({
       notificationsCount: 0,
       notifications: [],
+      showNotificationsMenu: false,
+      showNavMenu: false,
     });
 
     const fetchData = (): void => {
@@ -245,20 +249,18 @@ export default defineComponent({
       },
     ];
 
+    const handleOnProfileButtonClick = (): void => {
+      navigationState.showNavMenu = !navigationState.showNavMenu;
+      navigationState.showNotificationsMenu = false;
+    };
+
     return {
       user,
       userNotificationsCount,
       navDropdownItems,
+      handleOnProfileButtonClick,
       ...toRefs(navigationState),
     };
-  },
-  data() {
-    return {
-      showMenu: false,
-    };
-  },
-  mounted() {
-    // loadUser();
   },
 });
 </script>
