@@ -75,7 +75,9 @@
         >
           <button
             type="button"
+            :disabled="notificationsCount === 0"
             class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+            @click="handleOnNotificationsButtonClick"
           >
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
@@ -99,6 +101,46 @@
               class="absolute top-1 right-10 px-1.5 py-0.5 bg-yellow-500 rounded-full text-xs text-white"
             >
               {{ notificationsCount }}
+            </div>
+            <div
+              class="origin-top-right absolute right-10 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+              v-if="showNotificationsMenu"
+            >
+              <template
+                v-for="(notification, index) in notifications"
+                :key="index"
+              >
+                <div
+                  class="block px-4 py-2 text-sm text-gray-700 text-left flex justify-between"
+                  role="menuitem"
+                  tabindex="-1"
+                  :id="id"
+                >
+                  {{ `${notification.entity} is ${notification.eventType}` }}
+                  <button
+                    type="button"
+                    @click="handleOnNotificationDelete(notification._id)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      viewBox="0 0 24 24"
+                      stroke="red"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </template>
             </div>
           </button>
 
@@ -219,7 +261,7 @@ export default defineComponent({
     });
 
     const fetchData = (): void => {
-      const { get } = useApiWithAuth("/api/notifications/me");
+      const { get } = useApiWithAuth("/api/notifications/me?isRead=false");
       get().then((data) => {
         navigationState.notifications = data.notifications;
         navigationState.notificationsCount = data.notificationsCount;
@@ -254,11 +296,32 @@ export default defineComponent({
       navigationState.showNotificationsMenu = false;
     };
 
+    const handleOnNotificationsButtonClick = (): void => {
+      navigationState.showNotificationsMenu =
+        !navigationState.showNotificationsMenu;
+      navigationState.showNavMenu = false;
+    };
+
+    const handleOnNotificationDelete = (notificationId: string): void => {
+      const { put } = useApiWithAuth(`/api/notifications/${notificationId}`);
+      const paylod: { isRead: boolean } = {
+        isRead: true,
+      };
+      put(paylod).then(() => {
+        navigationState.notifications = navigationState.notifications.filter(
+          (notification) => notification._id !== notificationId
+        );
+      });
+      fetchData();
+    };
+
     return {
       user,
       userNotificationsCount,
       navDropdownItems,
       handleOnProfileButtonClick,
+      handleOnNotificationsButtonClick,
+      handleOnNotificationDelete,
       ...toRefs(navigationState),
     };
   },

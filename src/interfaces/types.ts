@@ -40,6 +40,7 @@ enum Entity {
   TASK = "Task",
 }
 export interface Notification {
+  _id: string;
   entity: Entity;
   entityId: string;
   eventType: EventType;
