@@ -47,4 +47,5 @@ export interface Notification {
   actor: User;
   isRead: boolean;
   notifier: User;
+  message: string;
 }

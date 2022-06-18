@@ -120,7 +120,7 @@
                   tabindex="-1"
                   :id="id"
                 >
-                  {{ `${notification.entity} is ${notification.eventType}` }}
+                  {{ notification.message }}
                   <button
                     type="button"
                     @click="handleOnNotificationDelete(notification._id)"
@@ -307,11 +307,7 @@ export default defineComponent({
       const paylod: { isRead: boolean } = {
         isRead: true,
       };
-      put(paylod).then(() => {
-        navigationState.notifications = navigationState.notifications.filter(
-          (notification) => notification._id !== notificationId
-        );
-      });
+      put(paylod);
       fetchData();
     };
 
