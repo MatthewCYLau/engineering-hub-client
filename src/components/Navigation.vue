@@ -307,8 +307,12 @@ export default defineComponent({
       const paylod: { isRead: boolean } = {
         isRead: true,
       };
-      put(paylod);
-      fetchData();
+      put(paylod).then(() => {
+        navigationState.notifications = navigationState.notifications.filter(
+          (notification) => notification._id !== notificationId
+        );
+        navigationState.notificationsCount--;
+      });
     };
 
     return {
