@@ -115,7 +115,7 @@
                 :key="index"
               >
                 <div
-                  class="block px-4 py-2 text-sm text-gray-700 text-left flex justify-between"
+                  class="block px-4 py-2 text-sm text-gray-700 text-left flex justify-between hover:bg-gray-100"
                   role="menuitem"
                   tabindex="-1"
                   :id="id"
