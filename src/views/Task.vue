@@ -77,11 +77,16 @@
         </div>
       </div>
       <UsersTable
-        v-if="data"
+        v-if="data && contributors.length > 0"
         :columns="['Name', 'Email', 'Status', 'Action']"
         :data="contributors"
         :action="removeContributor"
         :currentUserId="currentUserId"
+      />
+      <Notification
+        v-if="!contributors.length"
+        :header="'No contributors...yet!'"
+        :body="'Contribute to ' + data.name + ' now!'"
       />
     </div>
   </section>
@@ -94,6 +99,7 @@ import { useApiWithAuth } from "../modules/api";
 import { useModal } from "../modules/modal";
 import UsersTable from "../components/UsersTable.vue";
 import Modal from "../components/Modal.vue";
+import Notification from "../components/Notification.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
 interface ContributeTaskPayload {
@@ -101,7 +107,7 @@ interface ContributeTaskPayload {
 }
 
 export default defineComponent({
-  components: { UsersTable, Modal },
+  components: { UsersTable, Modal, Notification },
   props: ["id"],
   setup(props) {
     const router = useRouter();
