@@ -84,7 +84,7 @@
         :currentUserId="currentUserId"
       />
       <Notification
-        v-if="!contributors.length"
+        v-if="data && !contributors.length"
         :header="'No contributors...yet!'"
         :body="'Contribute to ' + data.name + ' now!'"
       />
