@@ -5,8 +5,13 @@
     >
       <div>
         <h1 class="text-white font-bold text-xl font-sans">Engineer Interviewer Finder</h1>
+        <br/>
         <p class="text-white mt-1">
           Post, read, update and delete your interview availability
+        </p>
+        <br/>
+        <p class="text-white mt-1">
+          Find Engineers to take on interviews during their specified availability
         </p>
       </div>
     </div>
@@ -18,6 +23,7 @@
           <p class="mt-3 text-gray-500 dark:text-gray-300">
             Sign in to access your account
           </p>
+          
         </div>
 
         <div class="mt-8">
