@@ -7,7 +7,7 @@
         alt="Task"
       />
       <h3
-        class="tracking-widest text-indigo-500 text-xs font-medium title-font"
+        class="tracking-widest text-red-500 text-xs font-medium title-font"
       >
         {{ `${firstName} ${lastName}` }}
       </h3>

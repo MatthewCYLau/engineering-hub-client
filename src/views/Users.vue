@@ -8,7 +8,7 @@
           >
             Users
           </h1>
-          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+          <div class="h-1 w-20 bg-red-500 rounded"></div>
         </div>
       </div>
       <div class="flex flex-wrap -m-4">
@@ -22,8 +22,9 @@
             :location="user.location"
             :bio="user.bio"
             :status="user.status"
-            :team="user.team"
+            :role="user.role"
             :avatar="user.avatar"
+            :grade="user.grade"
           />
         </div>
       </div>

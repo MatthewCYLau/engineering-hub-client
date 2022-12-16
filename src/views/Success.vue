@@ -15,7 +15,7 @@
         <div class="py-10 text-center">
           <router-link to="/dashboard">
             <button
-              class="text-white px-4 mt-8 w-auto h-10 bg-indigo-500 rounded-full hover:bg-indigo-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+              class="text-white px-4 mt-8 w-auto h-10 bg-red-500 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
             >
               <span class="title-font font-medium">Back to Dashboard</span>
             </button>

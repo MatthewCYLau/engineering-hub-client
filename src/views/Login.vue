@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen flex">
     <div
-      class="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-600 i justify-around items-center"
+      class="flex w-1/2 bg-gradient-to-tr from-green-800 to-green-600 i justify-around items-center"
     >
       <div>
         <h1 class="text-white font-bold text-xl font-sans">Engineering Hub</h1>
@@ -65,7 +65,7 @@
                 >
                 <a
                   href="#"
-                  class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline"
+                  class="text-sm text-gray-400 focus:text-green-500 hover:text-red-500 hover:underline"
                   >Forgot password?</a
                 >
               </div>
@@ -97,7 +97,7 @@
             <div class="mt-6">
               <button
                 type="submit"
-                class="block w-full bg-indigo-600 hover:bg-indigo-500 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+                class="block w-full bg-red-600 hover:bg-green-600  mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
               >
                 Login
               </button>
@@ -108,7 +108,7 @@
             Don&#x27;t have an account yet?
             <router-link to="/register"
               ><span
-                class="text-blue-500 focus:outline-none focus:underline hover:underline"
+                class="text-red-500 focus:outline-none focus:text-green-500 focus:underline hover:underline"
                 >Sign up</span
               ></router-link
             >
@@ -117,7 +117,7 @@
             Back to
             <router-link to="/"
               ><span
-                class="text-blue-500 focus:outline-none focus:underline hover:underline"
+                class="text-red-500 focus:outline-none focus:text-green-500 focus:underline hover:underline"
                 >Home</span
               ></router-link
             >

@@ -8,7 +8,7 @@
           >
             Edit Profile
           </h1>
-          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+          <div class="h-1 w-20 bg-red-500 rounded"></div>
         </div>
       </div>
       <div class="flex flex-wrap -m-4">
@@ -26,7 +26,7 @@
                   id="email"
                   placeholder="Email"
                   v-model="email"
-                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
               </div>
               <div class="flex flex-col mb-6">
@@ -37,7 +37,7 @@
                   id="firstName"
                   v-model="firstName"
                   placeholder="First name"
-                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
               </div>
               <div class="flex flex-col mb-6">
@@ -48,7 +48,7 @@
                   id="lastName"
                   v-model="lastName"
                   placeholder="First name"
-                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
               </div>
               <div class="flex flex-col mb-6">
@@ -59,7 +59,7 @@
                   id="bio"
                   v-model="bio"
                   placeholder="Bio"
-                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
               </div>
               <div class="flex flex-col mb-6">
@@ -70,7 +70,7 @@
                   id="team"
                   v-model="team"
                   placeholder="Team"
-                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
               </div>
               <div class="flex flex-col mb-6">
@@ -81,7 +81,7 @@
                   id="location"
                   v-model="location"
                   placeholder="Location"
-                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
               </div>
               <Dropdown
@@ -100,7 +100,7 @@
               </div>
               <button
                 type="submit"
-                class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300"
+                class="md:w-32 bg-red-600 hover:bg-red-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-red-500 transition ease-in-out duration-300"
               >
                 Submit
               </button>

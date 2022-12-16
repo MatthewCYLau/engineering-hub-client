@@ -16,7 +16,7 @@
             >
               {{ `${userData.firstName} ${userData.lastName}` }}
             </h1>
-            <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+            <div class="h-1 w-20 bg-red-500 rounded"></div>
             <p class="text-base tracking-wide mb-6 md:max-w-lg mt-8">
               {{
                 userData.bio ? userData.bio : "Add something about yourself!"
@@ -34,7 +34,7 @@
                 </g>
               </svg>
               <h1 class="px-2 text-sm">
-                {{ userData.team ? userData.team : "Add your team!" }}
+                {{ userData.role ? userData.role : "Add your team!" }}
               </h1>
             </div>
             <div class="flex items-center mt-4 text-gray-700">
@@ -68,19 +68,19 @@
         </div>
         <div style="border-bottom: 2px solid #eaeaea">
           <ul class="flex cursor-pointer">
-            <li
+            <li v-if="userData.role=='Recruiter'"
               class="py-2 px-6 rounded-t-lg"
               :class="{ 'bg-gray-200': selectedTab === 'Your tasks' }"
               @click="selectedTab = 'Your tasks'"
             >
-              Your tasks
+              Your Interviews
             </li>
-            <li
+            <li v-if="userData.role=='Engineer'"
               class="py-2 px-6 rounded-t-lg text-gray-500"
               @click="selectedTab = 'Your contributions'"
               :class="{ 'bg-gray-200': selectedTab === 'Your contributions' }"
             >
-              Your contributions
+              Your Availability
             </li>
           </ul>
         </div>
@@ -88,14 +88,17 @@
           <div class="w-full mb-6 lg:mb-0">
             <h1
               class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
+              v-if="userData.role=='Recruiter'"
             >
-              {{
-                selectedTab === "Your tasks"
-                  ? "Your tasks"
-                  : "Your contributions"
-              }}
+              Your Interviews
             </h1>
-            <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+            <h1
+              class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
+              v-if="userData.role=='Engineer'"
+            >
+              Your Availability
+            </h1>
+            <div class="h-1 w-20 bg-red-500 rounded"></div>
           </div>
         </div>
         <TasksTable

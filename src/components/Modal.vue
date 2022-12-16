@@ -23,13 +23,13 @@
         <hr />
         <div class="ml-auto">
           <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             @click="handleConfirm"
           >
             Confirm
           </button>
           <button
-            class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-2"
+            class="bg-transparent hover:bg-gray-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded ml-2"
             @click="handleCancel"
           >
             Cancel

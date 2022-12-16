@@ -8,8 +8,8 @@
           <div class="flex items-center justify-start w-1/4 h-full pr-4">
             <a href="/" class="inline-block py-4 md:py-0">
               <span class="p-1 text-xl font-black leading-none text-gray-900"
-                ><span>Engineering Hub</span
-                ><span class="text-indigo-600">.</span></span
+                ><span>Interviewer Finder</span
+                ><span class="text-red-600">.</span></span
               >
             </a>
           </div>
@@ -23,7 +23,7 @@
               <a
                 href="#_"
                 class="inline-flex items-center block w-auto h-16 px-6 text-xl font-black leading-none text-gray-900 md:hidden"
-                >tails<span class="text-indigo-600">.</span></a
+                >tails<span class="text-green-600">.</span></a
               >
               <div
                 class="flex flex-col items-start justify-center w-full space-x-6 text-center lg:space-x-8 md:w-2/3 md:mt-0 md:flex-row md:items-center"
@@ -33,12 +33,12 @@
               >
                 <a
                   href="/login"
-                  class="w-full px-6 py-2 mr-0 text-gray-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto"
+                  class="w-full px-6 py-2 mr-0 text-red-700 md:px-0 lg:pl-2 md:mr-4 lg:mr-5 md:w-auto hover:text-green-600"
                   >Sign In</a
                 >
                 <a
                   href="/register"
-                  class="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600"
+                  class="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-red-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-green-600 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2"
                   >Sign Up</a
                 >
               </div>
@@ -88,31 +88,31 @@
         <h1
           class="text-5xl font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl"
         >
-          <span class="inline md:block">Start Capturing Your</span>
+          <span class="inline md:block">Find Available Engineers</span>
           <span
-            class="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-indigo-500 md:inline-block"
-            >Next Great Ideas</span
+            class="relative mt-2 text-transparent bg-clip-text bg-gradient-to-br from-red-600 to-red-500 md:inline-block"
+            >For Tech Interviews</span
           >
         </h1>
         <div
           class="mx-auto mt-5 text-gray-500 md:mt-12 md:max-w-lg md:text-center lg:text-lg"
         >
-          Create, read, update, and delete your tasks
+          See their preferred interview timeslots
         </div>
         <div class="flex flex-col items-center mt-12 text-center">
           <span class="relative inline-flex w-full md:w-auto">
             <a
               href="/register"
-              class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+              class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-red-600 border border-transparent rounded-full md:w-auto hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600"
             >
               Sign Up
             </a>
             <span
-              class="absolute top-0 right-0 px-2 py-1 -mt-3 -mr-6 text-xs font-medium leading-tight text-white bg-green-400 rounded-full"
+              class="absolute top-0 right-0 px-2 py-1 -mt-3 -mr-6 text-xs font-medium leading-tight text-white bg-green-600 rounded-full"
               >now!</span
             >
           </span>
-          <a href="/login" class="mt-3 text-sm text-indigo-500">Sign In</a>
+          <a href="/login" class="mt-3 text-sm text-red-500 hover:text-green-600">Sign In</a>
         </div>
       </div>
       <!-- End Main Hero Content -->

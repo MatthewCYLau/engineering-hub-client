@@ -2,7 +2,7 @@
   <div
     class="flex flex-col items-center group gap-2 group-hover:border-2 group-hover:border-gray-300 p-1"
     @click="onClick(name)"
-    :class="{ 'border-2 border-indigo-500 rounded-md': isSelected }"
+    :class="{ 'border-2 border-red-500 rounded-md': isSelected }"
   >
     <img
       class="rounded border-2 border-transparent w-20 h-20"

@@ -45,8 +45,8 @@
           "
         >
           <a
-            class="block p-2 border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100"
-            :class="{ 'border-blue-600 ': selectedOption === option }"
+            class="block p-2 border-transparent border-l-4 group-hover:border-red-600 group-hover:bg-gray-100"
+            :class="{ 'border-red-600 ': selectedOption === option }"
             >{{ option }}</a
           >
         </div>

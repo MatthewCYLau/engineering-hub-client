@@ -5,7 +5,7 @@
       :src="require(`@/assets/${avatar}.png`)"
       alt="man-avatar"
     />
-    <div class="flex items-center px-6 py-3 bg-gray-900">
+    <div class="flex px-3 py-3 bg-gray-900">
       <svg class="h-6 w-6 text-white fill-current" viewBox="0 0 512 512">
         <path
           d="M256 48C150 48 64 136.2 64 245.1v153.3c0 36.3 28.6 65.7 64 65.7h64V288h-85.3v-42.9c0-84.7 66.8-153.3 149.3-153.3s149.3 68.5 149.3 153.3V288H320v176h64c35.4 0 64-29.3 64-65.7V245.1C448 136.2 362 48 256 48z"
@@ -17,6 +17,7 @@
       <h1 class="text-2xl font-semibold text-gray-800">
         {{ `${firstName} ${lastName}` }}
       </h1>
+      <h1 class=" py-2 text-gray-800 font-semibold text-md">Grade: {{ grade }}</h1>
       <p class="py-2 text-lg text-gray-700">
         {{ bio }}
       </p>
@@ -31,7 +32,7 @@
             />
           </g>
         </svg>
-        <h1 class="px-2 text-sm">{{ team }}</h1>
+        <h1 class="px-2 text-sm">{{ role }}</h1>
       </div>
       <div class="flex items-center mt-4 text-gray-700">
         <svg class="h-6 w-6 fill-current" viewBox="0 0 512 512">
@@ -90,11 +91,15 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    team: {
+    role: {
       type: String,
       required: true,
     },
     avatar: {
+      type: String,
+      required: true,
+    },
+    grade: {
       type: String,
       required: true,
     },

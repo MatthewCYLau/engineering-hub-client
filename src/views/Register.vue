@@ -1,12 +1,12 @@
 <template>
   <div class="h-screen flex">
     <div
-      class="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-600 i justify-around items-center"
+      class="flex w-1/2 bg-gradient-to-tr from-green-800 to-green-600 i justify-around items-center"
     >
       <div>
-        <h1 class="text-white font-bold text-xl font-sans">Engineering Hub</h1>
+        <h1 class="text-white font-bold text-xl font-sans">Interviewer Finder</h1>
         <p class="text-white mt-1">
-          Create, read, update, and delete your tasks
+          Find the availability of interviewers 
         </p>
       </div>
     </div>
@@ -112,6 +112,56 @@
                 />
               </div>
             </div>
+            <div>
+              <label
+                for="role"
+                class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                >Role</label
+              >
+              <div
+                class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4"
+              >
+                <select v-model="role" 
+                class="pl-2 outline-none border-none w-full"
+                type="text"
+                name="role"
+                id="role">
+                  <option>Recruiter</option>
+                  <option>Engineer</option>
+            </select>
+              </div>
+            </div>
+
+            <div >
+              <label
+                for="grade"
+                class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
+                >Grade</label
+              >
+              <div
+                class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4"
+              >
+                <select  v-if="role === 'Engineer'" v-model="grade" 
+                class="pl-2 outline-none border-none w-full"
+                type="text"
+                name="grade"
+                id="grade">
+                  <option>E0</option>
+                  <option>E1</option>
+                  <option>E2</option>
+                  <option>E3</option>
+                  <option>E4</option>
+                  <option>E5</option>
+            </select>
+            <select v-if="role === 'Recruiter'" v-model="grade" 
+                class="pl-2 outline-none border-none w-full"
+                type="text"
+                name="grade"
+                id="grade">
+              <option>NA</option>
+            </select>
+              </div>
+            </div>
 
             <div class="mt-6">
               <div class="flex justify-between mb-2">
@@ -149,7 +199,7 @@
             <div class="mt-6">
               <button
                 type="submit"
-                class="block w-full bg-indigo-600 hover:bg-indigo-500 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+                class="block w-full bg-red-600 hover:bg-green-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
               >
                 Sign Up
               </button>
@@ -160,7 +210,7 @@
             Already has an account?
             <router-link to="/login"
               ><span
-                class="text-blue-500 focus:outline-none focus:underline hover:underline"
+                class="text-red-500 focus:outline-none focus:underline hover:underline"
                 >Login</span
               ></router-link
             >
@@ -169,7 +219,7 @@
             Back to
             <router-link to="/"
               ><span
-                class="text-blue-500 focus:outline-none focus:underline hover:underline"
+                class="text-red-500 focus:outline-none focus:underline hover:underline"
                 >Home</span
               ></router-link
             >
@@ -191,6 +241,8 @@ interface LoginPayload {
   firstName?: string;
   lastName?: string;
   joinedDate?: Date;
+  grade?: string;
+  role?: string
 }
 
 const transformDateToDdMmYyyy = (joinedDate: Date): string => {
@@ -213,6 +265,8 @@ export default defineComponent({
       firstName: undefined,
       lastName: undefined,
       joinedDate: undefined,
+      grade: undefined, 
+      role: undefined
     });
 
     const submit = () => {

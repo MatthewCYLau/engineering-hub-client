@@ -6,12 +6,12 @@
           <h1
             class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
           >
-            Engineering Tasks
+            Interviewer Finder
           </h1>
-          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+          <div class="h-1 w-20 bg-red-500 rounded"></div>
           <router-link to="/add-task">
             <button
-              class="text-white px-4 mt-8 w-auto h-10 bg-indigo-500 rounded-full hover:bg-indigo-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+              class="text-white px-4 mt-8 w-auto h-10 bg-red-500 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
             >
               <svg
                 viewBox="0 0 20 20"
@@ -34,10 +34,10 @@
         <div
           class="xl:w-1/3 md:w-1/2 p-4"
           v-for="task in tasks"
-          :key="task._id"
+          :key="task.owner.id"
         >
           <TaskCard
-            :id="task._id"
+            :id="task.owner.id"
             :firstName="task.owner.firstName"
             :lastName="task.owner.lastName"
             :name="task.name"
@@ -48,11 +48,11 @@
       </div>
       <div class="flex mt-4">
         <button
-          class="border border-indigo-500 text-indigo-500 block rounded-sm font-bold py-4 px-6 mr-2 flex items-center"
+          class="border border-red-500 text-red-500 block rounded-sm font-bold py-4 px-6 mr-2 flex items-center"
           @click="handleOnPreviousPageClick"
           :disabled="shouldDisablePreviousButton"
           :class="{
-            'bg-indigo-500 hover:bg-indigo-400 hover:text-white text-white ':
+            'bg-red-500 hover:bg-red-400 hover:text-white text-white ':
               !shouldDisablePreviousButton,
           }"
         >
@@ -76,11 +76,11 @@
           Previous page
         </button>
         <button
-          class="border border-indigo-500 text-indigo-500 block rounded-sm font-bold py-4 px-6 ml-2 flex items-center"
+          class="border border-red-500 text-red-500 block rounded-sm font-bold py-4 px-6 ml-2 flex items-center"
           @click="handleOnNextPageClick"
           :disabled="shouldDisableNextButton"
           :class="{
-            'bg-indigo-500 hover:bg-indigo-400 hover:text-white text-white':
+            'bg-red-500 hover:bg-red-400 hover:text-white text-white':
               !shouldDisableNextButton,
           }"
         >
@@ -137,7 +137,7 @@ export default defineComponent({
 
     const fetchData = (): void => {
       const { get, data } = useApiWithAuth(
-        `/api/tasks?pageSize=${constants.PAGE_SIZE.toString()}&page=${
+        `/api/availability?pageSize=${constants.PAGE_SIZE.toString()}&page=${
           dashboardState.currentPage
         }`
       );

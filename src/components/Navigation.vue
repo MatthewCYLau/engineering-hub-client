@@ -1,12 +1,12 @@
 <template>
-  <nav class="bg-gray-800">
+  <nav class="bg-green-600">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <button
             type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
@@ -48,7 +48,7 @@
         >
           <div class="flex-shrink-0 flex items-center">
             <span class="p-1 text-xl text-white leading-none font-black"
-              ><span>Engineering Hub</span
+              ><span>Interviewer Finder</span
               ><span class="text-slate-50">.</span></span
             >
           </div>
@@ -57,14 +57,14 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a
                 href="/dashboard"
-                class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                class="bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium"
                 aria-current="page"
                 >Dashboard</a
               >
 
               <a
                 href="/users"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                class="text-white hover:bg-green-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >Users</a
               >
             </div>
@@ -76,7 +76,7 @@
           <button
             type="button"
             :disabled="notificationsCount === 0"
-            class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+            class="bg-green-500 p-1 rounded-full text-white-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
             @click="handleOnNotificationsButtonClick"
           >
             <span class="sr-only">View notifications</span>
@@ -87,7 +87,7 @@
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="2"
-              stroke="currentColor"
+              stroke="white"
               aria-hidden="true"
             >
               <path

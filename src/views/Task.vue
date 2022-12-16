@@ -13,7 +13,7 @@
           >
             Task
           </h1>
-          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+          <div class="h-1 w-20 bg-red-500 rounded"></div>
         </div>
       </div>
       <div class="flex flex-wrap -m-4" v-if="data">
@@ -25,7 +25,7 @@
               alt="Task"
             />
             <h3
-              class="tracking-widest text-indigo-500 text-xs font-medium title-font"
+              class="tracking-widest text-red-500 text-xs font-medium title-font"
             >
               {{ `${data.owner.firstName} ${data.owner.lastName}` }}
             </h3>
@@ -73,7 +73,7 @@
           >
             Contributors
           </h1>
-          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+          <div class="h-1 w-20 bg-red-500 rounded"></div>
         </div>
       </div>
       <UsersTable
