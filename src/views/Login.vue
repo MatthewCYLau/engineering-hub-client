@@ -4,9 +4,18 @@
       class="flex w-1/2 bg-gradient-to-tr from-green-800 to-green-600 i justify-around items-center"
     >
       <div>
-        <h1 class="text-white font-bold text-xl font-sans">Engineering Hub</h1>
+        <h1 class="text-white font-bold text-xl font-sans">Engineer Interviewer Finder</h1>
+        <br/>
         <p class="text-white mt-1">
+<<<<<<< HEAD
           Create, read, update, and delete your availabilities
+=======
+          Post, read, update and delete your interview availability
+        </p>
+        <br/>
+        <p class="text-white mt-1">
+          Find Engineers to take on interviews during their specified availability
+>>>>>>> d63c43a8e75a0933a1e6cd6f30d8c014348764eb
         </p>
       </div>
     </div>
@@ -18,6 +27,7 @@
           <p class="mt-3 text-gray-500 dark:text-gray-300">
             Sign in to access your account
           </p>
+          
         </div>
 
         <div class="mt-8">
