@@ -6,7 +6,7 @@
       <div>
         <h1 class="text-white font-bold text-xl font-sans">Engineering Hub</h1>
         <p class="text-white mt-1">
-          Create, read, update, and delete your tasks
+          Create, read, update, and delete your availabilities
         </p>
       </div>
     </div>
@@ -97,7 +97,7 @@
             <div class="mt-6">
               <button
                 type="submit"
-                class="block w-full bg-red-600 hover:bg-green-600  mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+                class="block w-full bg-red-600 hover:bg-green-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
               >
                 Login
               </button>

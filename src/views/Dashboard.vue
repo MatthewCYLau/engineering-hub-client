@@ -9,7 +9,7 @@
             Interviewer Finder
           </h1>
           <div class="h-1 w-20 bg-red-500 rounded"></div>
-          <router-link to="/add-task">
+          <router-link to="/add-availability">
             <button
               class="text-white px-4 mt-8 w-auto h-10 bg-red-500 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
             >
@@ -25,7 +25,7 @@
                                     C15.952,9,16,9.447,16,10z"
                 />
               </svg>
-              <span class="title-font font-medium">Add task</span>
+              <span class="title-font font-medium">Add availability</span>
             </button>
           </router-link>
         </div>
@@ -33,16 +33,16 @@
       <div class="flex flex-wrap -m-4">
         <div
           class="xl:w-1/3 md:w-1/2 p-4"
-          v-for="task in tasks"
-          :key="task.owner.id"
+          v-for="availability in availabilities"
+          :key="availability.owner.id"
         >
-          <TaskCard
-            :id="task.owner.id"
-            :firstName="task.owner.firstName"
-            :lastName="task.owner.lastName"
-            :name="task.name"
-            :theme="task.theme"
-            :description="task.description"
+          <AvailabilityCard
+            :id="availability.owner.id"
+            :firstName="availability.owner.firstName"
+            :lastName="availability.owner.lastName"
+            :name="availability.name"
+            :theme="availability.theme"
+            :description="availability.description"
           />
         </div>
       </div>
@@ -113,26 +113,26 @@
 <script lang="ts">
 import { defineComponent, computed, watch, reactive, toRefs } from "vue";
 import { useApiWithAuth } from "../modules/api";
-import TaskCard from "../components/TaskCard.vue";
+import AvailabilityCard from "../components/AvailabilityCard.vue";
 import { useAuth, loadUser } from "../modules/auth";
 import constants from "../modules/constants";
-import { Task } from "../interfaces/types";
+import { Availability } from "../interfaces/types";
 import { usePagination } from "../modules/pagination";
 
 interface DashboardState {
   currentPage: number;
-  currentTasks: Task[];
+  currentAvailabilities: Availability[];
 }
 
 export default defineComponent({
-  components: { TaskCard },
+  components: { AvailabilityCard },
   setup() {
     loadUser();
     const { user } = useAuth();
     const { setItemsCount, itemsCount } = usePagination();
     const dashboardState = reactive<DashboardState>({
       currentPage: 1,
-      currentTasks: [],
+      currentAvailabilities: [],
     });
 
     const fetchData = (): void => {
@@ -141,17 +141,19 @@ export default defineComponent({
           dashboardState.currentPage
         }`
       );
-      get().then((data) => (dashboardState.currentTasks = data.tasks));
+      get().then(
+        (data) => (dashboardState.currentAvailabilities = data.availabilities)
+      );
       watch([data], () => {
         if (data.value) {
-          setItemsCount(data.value.tasksCount);
+          setItemsCount(data.value.availabilitiesCount);
         }
       });
     };
     fetchData();
     // const initials = computed(() => user?.value && user.value.email);
 
-    const tasks = computed(() => dashboardState.currentTasks);
+    const availabilities = computed(() => dashboardState.currentAvailabilities);
 
     const handleOnNextPageClick = () => {
       dashboardState.currentPage++;
@@ -177,7 +179,7 @@ export default defineComponent({
       user,
       handleOnNextPageClick,
       handleOnPreviousPageClick,
-      tasks,
+      availabilities,
       shouldDisablePreviousButton,
       shouldDisableNextButton,
       ...toRefs(dashboardState),

@@ -1,8 +1,8 @@
 <template>
   <Modal
     v-if="isModalVisible"
-    :onConfirm="deleteTask"
-    :message="'Are you sure you want to delete this task?'"
+    :onConfirm="deleteAvailability"
+    :message="'Are you sure you want to delete this availability?'"
   />
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto max-w-7x1">
@@ -11,7 +11,7 @@
           <h1
             class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
           >
-            Task
+            Availability
           </h1>
           <div class="h-1 w-20 bg-red-500 rounded"></div>
         </div>
@@ -22,7 +22,7 @@
             <img
               class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72 rounded object-center mb-6"
               :src="require(`@/assets/${data.theme}.png`)"
-              alt="Task"
+              alt="Availability"
             />
             <h3
               class="tracking-widest text-red-500 text-xs font-medium title-font"
@@ -42,12 +42,12 @@
                     .map((contributor) => contributor.id)
                     .includes(user.id)
                 "
-                @click="contributeTask"
+                @click="contributeAvailability"
                 class="text-white px-4 mt-8 w-auto h-10 bg-green-500 rounded-full hover:bg-green-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none mr-4"
               >
                 <span class="title-font font-medium">Contribute</span>
               </button>
-              <router-link :to="'/tasks/edit/' + props.id">
+              <router-link :to="'/availabilities/edit/' + props.id">
                 <button
                   v-if="user.id === data.owner.id"
                   class="text-white px-4 mt-8 w-auto h-10 bg-yellow-500 rounded-full hover:bg-yellow-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none mr-4"
@@ -102,7 +102,7 @@ import Modal from "../components/Modal.vue";
 import Notification from "../components/Notification.vue";
 import { useAuth, loadUser } from "../modules/auth";
 
-interface ContributeTaskPayload {
+interface ContributeAvailabilityPayload {
   userId: string;
 }
 
@@ -114,7 +114,9 @@ export default defineComponent({
     loadUser();
     const { user } = useAuth();
     const { toggleModal, isModalVisible } = useModal();
-    const { loading, data, get } = useApiWithAuth(`/api/tasks/${props.id}`);
+    const { loading, data, get } = useApiWithAuth(
+      `/api/availabilities/${props.id}`
+    );
     const currentUserId = computed(() => user?.value && user.value.id);
 
     get();
@@ -125,16 +127,18 @@ export default defineComponent({
       () => data.value && (contributors.value = data.value.contributors)
     );
 
-    const deleteTask = () => {
-      const { del } = useApiWithAuth(`/api/tasks/${props.id}`);
+    const deleteAvailability = () => {
+      const { del } = useApiWithAuth(`/api/availabilities/${props.id}`);
       del().then(() => {
         router.push({ name: "dashboard" });
       });
     };
 
-    const contributeTask = () => {
-      const { post } = useApiWithAuth(`/api/tasks/${props.id}/contributors`);
-      const paylod: ContributeTaskPayload = {
+    const contributeAvailability = () => {
+      const { post } = useApiWithAuth(
+        `/api/availabilities/${props.id}/contributors`
+      );
+      const paylod: ContributeAvailabilityPayload = {
         userId: user?.value?.id || "",
       };
       post(paylod).then(() => {
@@ -154,7 +158,7 @@ export default defineComponent({
 
     const removeContributor = () => {
       const { del } = useApiWithAuth(
-        `/api/tasks/${props.id}/contributors/${currentUserId.value}`
+        `/api/availabilities/${props.id}/contributors/${currentUserId.value}`
       );
       del().then(() => {
         contributors.value = contributors.value.filter(
@@ -171,8 +175,8 @@ export default defineComponent({
       user,
       data,
       loading,
-      deleteTask,
-      contributeTask,
+      deleteAvailability,
+      contributeAvailability,
       removeContributor,
       currentUserId,
       contributors,

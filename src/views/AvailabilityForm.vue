@@ -19,12 +19,12 @@
               class="p-6 flex flex-col justify-center"
             >
               <div class="flex flex-col">
-                <label for="name" class="hidden">Name</label>
+                <label for="name" class="hidden">Job Role</label>
                 <input
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Name"
+                  placeholder="Job Role"
                   v-model="name"
                   class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
@@ -38,6 +38,33 @@
                   id="description"
                   v-model="description"
                   placeholder="Description"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
+                />
+              </div>
+
+              <div class="flex flex-col mt-2">
+                <label for="description" class="hidden">Time From</label>
+                <input
+                  type="datetime-local"
+                  name="timeFrom"
+                  id="timeFrom"
+                  :value="`${new Date()
+                    .toISOString()
+                    .substring(0, new Date().toISOString().length - 8)}`"
+                  class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
+                />
+              </div>
+
+              <div class="flex flex-col mt-2">
+                <label for="description" class="hidden">Time Until</label>
+                <input
+                  type="datetime-local"
+                  name="timeFrom"
+                  id="timeUntil"
+                  :value="`${new Date()
+                    .toISOString()
+                    .substring(0, new Date().toISOString().length - 8)}`"
+                  step="600"
                   class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-red-500 focus:outline-none"
                 />
               </div>
@@ -71,7 +98,7 @@ import ImageCard from "../components/ImageCard.vue";
 import { useApiWithAuth } from "../modules/api";
 import { useAuth } from "../modules/auth";
 
-interface CreateTaskPayload {
+interface CreateAvailabilityPayload {
   name?: string;
   description?: string;
   theme?: string;
@@ -83,12 +110,12 @@ export default defineComponent({
   setup(props) {
     // loadUser();
     const { user } = useAuth();
-    const { loading, data, post } = useApiWithAuth("/api/tasks");
-    const { put } = useApiWithAuth(`/api/tasks/${props.id}`);
+    const { loading, data, post } = useApiWithAuth("/api/availabilities");
+    const { put } = useApiWithAuth(`/api/availabilities/${props.id}`);
 
     const router = useRouter();
 
-    const payload = reactive<CreateTaskPayload>({
+    const payload = reactive<CreateAvailabilityPayload>({
       name: undefined,
       description: undefined,
       theme: "Engineering",
@@ -101,7 +128,7 @@ export default defineComponent({
     const isEditMode = path.value.includes("edit");
 
     if (isEditMode) {
-      const { get } = useApiWithAuth(`/api/tasks/${props.id}`);
+      const { get } = useApiWithAuth(`/api/availabilities/${props.id}`);
       get().then((res) => {
         payload.name = res.name;
         payload.description = res.description;
@@ -125,7 +152,7 @@ export default defineComponent({
     };
 
     const selectedTheme = computed(() => payload.theme);
-    const pageHeader = isEditMode ? "Edit Task" : "Add Task";
+    const pageHeader = isEditMode ? "Edit Availability" : "Add Availability";
 
     return {
       user,

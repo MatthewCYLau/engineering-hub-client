@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
 import Users from "@/views/Users.vue";
-import TaskForm from "@/views/TaskForm.vue";
+import AvailabilityForm from "@/views/AvailabilityForm.vue";
 import EditProfile from "@/views/EditProfile.vue";
-import TaskPage from "@/views/Task.vue";
+import AvailabilityPage from "@/views/Availability.vue";
 import Home from "@/views/Home.vue";
 import Profile from "@/views/Profile.vue";
 import Login from "@/views/Login.vue";
@@ -37,22 +37,22 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/add-task",
-    name: "addTask",
-    component: TaskForm,
+    path: "/add-availability",
+    name: "addAvailability",
+    component: AvailabilityForm,
     meta: { requiresAuth: true },
   },
   {
-    path: "/tasks/:id",
-    name: "taskPage",
-    component: TaskPage,
+    path: "/availabilities/:id",
+    name: "availabilityPage",
+    component: AvailabilityPage,
     meta: { requiresAuth: true },
     props: (route) => ({ id: route.params.id }),
   },
   {
-    path: "/tasks/edit/:id",
-    name: "editTask",
-    component: TaskForm,
+    path: "/availabilities/edit/:id",
+    name: "editAvailability",
+    component: AvailabilityForm,
     meta: { requiresAuth: true },
     props: (route) => ({ id: route.params.id }),
   },

@@ -55,14 +55,14 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { useRouter } from "vue-router";
-import AvatarPill from "../components/AvatarPill.vue";
+import AvatarPill from "./AvatarPill.vue";
 
 export default defineComponent({
   components: { AvatarPill },
   setup() {
     const router = useRouter();
-    const redirect = (taskId: string) =>
-      router.push({ path: `/tasks/${taskId}` });
+    const redirect = (availabilitiesId: string) =>
+      router.push({ path: `/availabilities/${availabilitiesId}` });
     return { redirect };
   },
   props: {

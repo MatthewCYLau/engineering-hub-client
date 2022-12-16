@@ -1,9 +1,10 @@
-export interface Task {
-  name: string;
+export interface Availability {
+  jobRole: string;
   description: string;
-  theme: string;
+  timeFrom: Date;
+  timeUntil: Date;
   owner: User;
-  contributors: User[];
+  booked: boolean;
 }
 
 export enum Status {
@@ -37,7 +38,7 @@ enum EventType {
 }
 
 enum Entity {
-  TASK = "Task",
+  AVAILABILITY = "Availability",
 }
 export interface Notification {
   _id: string;

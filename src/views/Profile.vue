@@ -68,14 +68,16 @@
         </div>
         <div style="border-bottom: 2px solid #eaeaea">
           <ul class="flex cursor-pointer">
-            <li v-if="userData.role=='Recruiter'"
+            <li
+              v-if="userData.role == 'Recruiter'"
               class="py-2 px-6 rounded-t-lg"
-              :class="{ 'bg-gray-200': selectedTab === 'Your tasks' }"
-              @click="selectedTab = 'Your tasks'"
+              :class="{ 'bg-gray-200': selectedTab === 'Your availabilities' }"
+              @click="selectedTab = 'Your availabilities'"
             >
               Your Interviews
             </li>
-            <li v-if="userData.role=='Engineer'"
+            <li
+              v-if="userData.role == 'Engineer'"
               class="py-2 px-6 rounded-t-lg text-gray-500"
               @click="selectedTab = 'Your contributions'"
               :class="{ 'bg-gray-200': selectedTab === 'Your contributions' }"
@@ -88,23 +90,27 @@
           <div class="w-full mb-6 lg:mb-0">
             <h1
               class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
-              v-if="userData.role=='Recruiter'"
+              v-if="userData.role == 'Recruiter'"
             >
               Your Interviews
             </h1>
             <h1
               class="sm:text-4xl text-5xl font-medium font-bold title-font mb-2 text-gray-900"
-              v-if="userData.role=='Engineer'"
+              v-if="userData.role == 'Engineer'"
             >
               Your Availability
             </h1>
             <div class="h-1 w-20 bg-red-500 rounded"></div>
           </div>
         </div>
-        <TasksTable
-          v-if="myTasks"
+        <AvailabilitiesTable
+          v-if="myAvailabilities"
           :columns="['Name', 'Description', 'Contributors']"
-          :data="selectedTab === 'Your tasks' ? tasks : contributions"
+          :data="
+            selectedTab === 'Your availabilities'
+              ? availabilities
+              : contributions
+          "
         />
       </div>
     </div>
@@ -113,17 +119,17 @@
 
 <script lang="ts">
 import { defineComponent, computed, reactive, toRefs, watch } from "vue";
-import TasksTable from "../components/TasksTable.vue";
+import AvailabilitiesTable from "../components/AvailabilitiesTable.vue";
 import { useApiWithAuth } from "../modules/api";
 import { useAuth } from "../modules/auth";
-import { Task } from "../interfaces/types";
+import { Availability } from "../interfaces/types";
 
 interface ProfilePageState {
-  tasks: Task[];
-  contributions: Task[];
+  availabilities: Availability[];
+  contributions: Availability[];
 }
 export default defineComponent({
-  components: { TasksTable },
+  components: { AvailabilitiesTable },
   setup() {
     const {
       loading,
@@ -133,34 +139,38 @@ export default defineComponent({
 
     const { user } = useAuth();
     const profilePageState = reactive<ProfilePageState>({
-      tasks: [],
+      availabilities: [],
       contributions: [],
     });
 
-    const { get: getCurrentUserTasks } = useApiWithAuth("/api/tasks/me");
+    const { get: getCurrentUserAvailabilities } = useApiWithAuth(
+      "/api/availabilities/me"
+    );
 
     getCurrentUser();
-    getCurrentUserTasks().then((data) => (profilePageState.tasks = data.tasks));
+    getCurrentUserAvailabilities().then(
+      (data) => (profilePageState.availabilities = data.availabilities)
+    );
 
     watch([user], () => {
       if (user?.value && user.value.id) {
         const currentUserId = user.value.id;
         const { get: getCurrentUserContributions } = useApiWithAuth(
-          `/api/tasks/?contributor=${currentUserId}`
+          `/api/availabilities/?contributor=${currentUserId}`
         );
         getCurrentUserContributions().then(
-          (data) => (profilePageState.contributions = data.tasks)
+          (data) => (profilePageState.contributions = data.availabilities)
         );
       }
     });
 
-    const myTasks = computed(() => profilePageState.tasks);
+    const myAvailabilities = computed(() => profilePageState.availabilities);
     const myContributions = computed(() => profilePageState.contributions);
 
     return {
       userData,
       loading,
-      myTasks,
+      myAvailabilities,
       myContributions,
       ...toRefs(profilePageState),
     };
@@ -170,7 +180,7 @@ export default defineComponent({
   },
   data() {
     return {
-      selectedTab: "Your tasks",
+      selectedTab: "Your availabilities",
     };
   },
 });

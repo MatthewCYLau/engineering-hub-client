@@ -11,7 +11,9 @@
         <h3 class="md:text-2xl text-base text-gray-900 text-center">
           Success!
         </h3>
-        <p class="text-gray-600 my-2">Thank you for contributing to a task.</p>
+        <p class="text-gray-600 my-2">
+          Thank you for contributing to a availability.
+        </p>
         <div class="py-10 text-center">
           <router-link to="/dashboard">
             <button
