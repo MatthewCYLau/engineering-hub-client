@@ -7,15 +7,11 @@
         <h1 class="text-white font-bold text-xl font-sans">Engineer Interviewer Finder</h1>
         <br/>
         <p class="text-white mt-1">
-<<<<<<< HEAD
-          Create, read, update, and delete your availabilities
-=======
           Post, read, update and delete your interview availability
         </p>
         <br/>
         <p class="text-white mt-1">
           Find Engineers to take on interviews during their specified availability
->>>>>>> d63c43a8e75a0933a1e6cd6f30d8c014348764eb
         </p>
       </div>
     </div>
