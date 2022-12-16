@@ -4,9 +4,9 @@
       class="flex w-1/2 bg-gradient-to-tr from-green-800 to-green-600 i justify-around items-center"
     >
       <div>
-        <h1 class="text-white font-bold text-xl font-sans">Engineering Hub</h1>
+        <h1 class="text-white font-bold text-xl font-sans">Engineer Interviewer Finder</h1>
         <p class="text-white mt-1">
-          Create, read, update, and delete your tasks
+          Post, read, update and delete your interview availability
         </p>
       </div>
     </div>
