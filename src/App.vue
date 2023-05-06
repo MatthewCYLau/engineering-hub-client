@@ -24,7 +24,7 @@ export default defineComponent({
         route.meta.requiresAuth === true &&
         !user?.value
       ) {
-        console.log("redirecting home in app.vue");
+        console.log("re-directing home in app.vue");
 
         router.push({ name: "home" });
       } else if (loading.value !== false) router.push({ name: "login" });
